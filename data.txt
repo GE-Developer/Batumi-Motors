@@ -1,0 +1,38 @@
+# ─── Domain ──────────────────────────────────────────────────
+domain = https://batumimotors.com
+
+
+# ─── Contacts ────────────────────────────────────────────────
+phone = +995 599 114 024
+phone-link = +995599114024
+whatsapp = 995599114024
+instagram = batumimotors
+
+
+# ─── Who made the site ───────────────────────────────────────
+# The credit at the very bottom of the footer. Its words live in text/*.txt
+# under the made-by key, while the name and address are here.
+author = GE-Developer
+author-url = https://ge-developer.tilda.ws
+
+
+# ─── Name ────────────────────────────────────────────────────
+brand-1 = Batumi
+brand-2 = Motors
+
+
+# ─── Delivery to other cities ────────────────────────────────
+# The price for ONE leg: handover or return. The calculator on a car page
+# takes both. Around Batumi and to the airport the price is per car, in the database.
+delivery-kutaisi = 100
+delivery-tbilisi = 200
+
+
+# ─── Fleet database ──────────────────────────────────────────────
+# The key is publishable: it can only read the cars that are switched on,
+# showing it to anyone is harmless. It cannot change data.
+db-url     = https://adfdzsbzjachpckyhlwz.supabase.co
+db-key     = sb_publishable_AT14404reJtHxfLls7g64A_NxnHIwLa
+# The storage domain only — the browser opens a connection to it in advance.
+photos-origin = https://adfdzsbzjachpckyhlwz.supabase.co
+photos-url = https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/

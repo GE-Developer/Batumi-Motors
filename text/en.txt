@@ -1,0 +1,220 @@
+# ═══════════════════════════════════════════════════════════════
+#  ENGLISH TEXT  →  batumimotors.com/en/…
+#
+#  The keys must match text/ru.txt.
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Menu ────────────────────────────────────────────────────
+nav-cars  = Fleet
+nav-deals = Offers
+nav-terms = Terms
+nav-about = About
+
+# ─── Buttons ─────────────────────────────────────────────────
+cta = Book now
+
+# ─── Footer ──────────────────────────────────────────────────
+tagline         = Car rental in Batumi, Georgia
+hours           = Open 24/7
+copyright       = © 2026 Batumi Motors. Batumi, Georgia
+made-by         = Made by
+footer-contacts = Contact
+
+# ─── Language switcher ───────────────────────────────────────
+lang-label = Site language
+
+# nav-label / theme-label — captions for blind users, not visible on screen
+nav-label   = Main menu
+theme-label = Switch theme
+
+# ═══════════════════════════════════════════════════════════════
+#  FLEET DICTIONARY — the key set must match ru.txt
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Class ───────────────────────────────────────────────────
+class-economy   = Economy
+class-comfort   = Comfort
+class-crossover = Crossover
+class-suv       = SUV
+class-premium   = Premium
+
+# ─── Body ────────────────────────────────────────────────────
+body-sedan     = Saloon
+body-liftback  = Liftback
+body-hatchback = Hatchback
+body-wagon     = Estate
+body-crossover = Crossover
+body-suv       = SUV
+body-minivan   = MPV
+
+# ─── Transmission ────────────────────────────────────────────
+trans-automatic = Automatic
+trans-manual    = Manual
+trans-cvt       = CVT
+
+# ─── Fuel ────────────────────────────────────────────────────
+fuel-petrol   = Petrol
+fuel-diesel   = Diesel
+fuel-hybrid   = Hybrid
+fuel-electric = Electric
+
+# ─── Fuel grade ──────────────────────────────────────────────
+grade-ai-92  = 92 octane
+grade-ai-95  = 95 octane
+grade-ai-98  = 98 octane
+grade-diesel = Diesel
+
+# ─── Drive and steering ──────────────────────────────────────
+drive-fwd = Front-wheel drive
+drive-rwd = Rear-wheel drive
+drive-awd = All-wheel drive
+drive-4wd = Four-wheel drive
+steering-left  = Left-hand drive
+steering-right = Right-hand drive
+
+# ─── Equipment ───────────────────────────────────────────────
+feature-sunroof         = Sunroof
+feature-heated-seats    = Heated seats
+feature-heated-wheel    = Heated steering wheel
+feature-leather         = Leather trim
+feature-alcantara       = Alcantara
+feature-climate-dual    = Dual-zone climate control
+feature-blind-spot      = Blind-spot monitoring
+feature-camera-rear     = Rear-view camera
+feature-camera-360      = 360° camera
+feature-cruise          = Cruise control
+feature-cruise-adaptive = Adaptive cruise control
+feature-carplay         = Apple CarPlay
+feature-bluetooth       = Bluetooth
+feature-ac              = Air conditioning
+feature-parking-sensors = Parking sensors
+feature-roof-rails      = Roof rails
+feature-isofix          = Isofix mounts
+feature-winter-tires    = Winter tyres
+
+# ─── Price and terms ─────────────────────────────────────────
+tariffs-title     = Price per day
+price-from        = from # per day
+deposit-none      = No deposit
+mileage-unlimited = No mileage limit
+
+# ─── Words with numbers ──────────────────────────────────────────
+seats-one = seat
+seats-few = seats
+seats-many = seats
+
+# ─── Photos ──────────────────────────────────────────────────────
+photo-alt  = # rental in Batumi
+photo-soon = Photo coming soon
+
+# The text WhatsApp opens with. The hash is replaced by the make and year.
+wa-text = Hello! I am interested in #
+
+# ═══════════════════════════════════════════════════════════════
+#  CAR PAGE DICTIONARY — the key set must match ru.txt
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Tab title and description for Google ─────────────────────
+car-title = # for rent in Batumi | Batumi Motors
+car-meta  = Car rental — # in Batumi. Daily price, delivery in the city and to the airport, book via WhatsApp.
+
+# ─── Crumbs and section headings ───────────────────────────────
+crumbs-label       = Breadcrumbs
+description-title  = Description
+specs-title        = Specifications
+features-title     = Features
+car-terms-title    = Terms for this car
+
+# ─── Spec labels ───────────────────────────────────────────────
+spec-class        = Class
+spec-body         = Body type
+spec-transmission = Transmission
+spec-drive        = Drivetrain
+spec-steering     = Steering
+spec-seats        = Seats
+spec-doors        = Doors
+spec-fuel         = Fuel type
+spec-fuel-grade   = Fuel grade
+spec-engine       = Engine size
+spec-power        = Power
+spec-torque       = Torque
+spec-acceleration = 0–100 km/h
+spec-consumption  = Fuel consumption
+spec-tank         = Fuel tank
+spec-trunk        = Boot space
+spec-clearance    = Ground clearance
+spec-weight       = Weight
+
+# ─── Units (the hash is the number itself) ─────────────────────
+unit-l            = # l
+unit-power        = # hp
+unit-torque       = # Nm
+unit-acceleration = # s
+unit-consumption  = # l/100km
+unit-clearance    = # mm
+unit-weight       = # kg
+
+# ─── Doors: number + word ──────────────────────────────────────
+
+# ─── Terms for this car ────────────────────────────────────────
+deposit-title          = Deposit
+terms-min-age          = Minimum age
+terms-experience       = Driving experience
+terms-mileage          = Mileage
+terms-insurance        = Insurance
+terms-delivery-city    = Delivery in the city
+terms-delivery-airport = Airport delivery
+terms-cross-border     = Crossing the border
+terms-note             = These terms apply to this car; other cars in the fleet may have different ones.
+
+delivery-free = Free
+
+# In en/ka all three forms coincide — pluralisation here does not tell
+# 21 from 25 the way Russian does; plural() for en/ka simply never
+# substitutes different strings for one/few/many in this key.
+age-from-one  = From # years old
+age-from-few  = From # years old
+age-from-many = From # years old
+
+experience-from-one  = # years or more
+experience-from-few  = # years or more
+experience-from-many = # years or more
+
+mileage-per-day   = # km per day
+mileage-free-from = Unlimited from day #
+
+insurance-kasko = Comprehensive (KASKO)
+
+cross-border-allowed   = Allowed
+cross-border-forbidden = Not allowed
+
+# ─── End of the page ───────────────────────────────────────────
+cta-box-title = Ready to book?
+cta-box-text  = We will reply on WhatsApp or by phone any time of day.
+
+# ═══════════════════════════════════════════════════════════════
+#  THE CALCULATOR ON A CAR PAGE
+#  The hash # is the place for the number the script substitutes.
+# ═══════════════════════════════════════════════════════════════
+calc-title    = Price calculator
+calc-days     = Rental period, days
+calc-pickup     = Pick-up
+calc-return     = Return
+calc-rent     = Rental
+calc-discount = Discount
+calc-delivery = Delivery
+calc-total    = Total
+calc-free     = Free
+calc-deposit  = Deposit # — refunded when you return the car
+calc-note     = The manager will quote delivery to other regions.
+close       = Close
+photo-prev  = Previous photo
+photo-next  = Next photo
+calc-legal    = This estimate is indicative and is not a public offer. The final price is confirmed by a manager at booking.
+place-city    = Anywhere in Batumi
+place-airport = Batumi airport
+place-kutaisi = Kutaisi
+place-tbilisi = Tbilisi
+place-other   = Other region — by arrangement
+place-none  = No delivery
+wa-days       = Rental period: # days

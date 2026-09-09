@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ru" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Условия аренды: залог, пробег, топливо | Batumi Motors</title>
+  <meta name="description" content="Условия аренды Batumi Motors: возраст от 21 года, залог $100, пробег 300 км в сутки и без ограничений от 3 суток, топливо 95-й и выше, оплата наличными.">
+
+  <!--#head-->
+  <!-- The font is loaded ahead of time. Which files depends on the page's
+       language: Cyrillic only on the Russian pages, Georgian only on Georgian. -->
+  <link rel="preload" href="/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/nunito-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- The car photos live in Supabase storage, on somebody else's domain.
+       Opening the connection in advance takes the TLS handshake off the first
+       photo — and that is the first thing a person sees in the fleet. -->
+  <link rel="preconnect" href="https://adfdzsbzjachpckyhlwz.supabase.co">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <link rel="canonical" href="https://batumimotors.com/ru/terms/">
+  <link rel="alternate" hreflang="ru" href="https://batumimotors.com/ru/terms/">
+  <link rel="alternate" hreflang="en" href="https://batumimotors.com/en/terms/">
+  <link rel="alternate" hreflang="ka" href="https://batumimotors.com/ka/terms/">
+  <link rel="alternate" hreflang="x-default" href="https://batumimotors.com/en/terms/">
+
+  <!-- How the page looks when the link is dropped into WhatsApp or Telegram.
+       The title and description are taken from the page itself, so every car
+       gets its own preview rather than one shared across the site. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Batumi Motors">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://batumimotors.com/ru/terms/">
+  <meta property="og:title" content="Условия аренды: залог, пробег, топливо | Batumi Motors">
+  <meta property="og:description" content="Условия аренды Batumi Motors: возраст от 21 года, залог $100, пробег 300 км в сутки и без ограничений от 3 суток, топливо 95-й и выше, оплата наличными.">
+  <meta name="twitter:card" content="summary">
+
+  <script>
+    // The theme is applied BEFORE painting, otherwise a dark page flashes white.
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (e) {}
+
+    // The animation freeze is lifted two frames after the first paint — the
+    // explanation is in style.css, the "Reset" section.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove("preload");
+      });
+    });
+  </script>
+  <!--#-->
+</head>
+
+<body>
+
+  <!-- HEADER =============================================================== -->
+  <!--#header terms-->
+  <header class="head">
+    <div class="shell head__row">
+
+      <a class="logo" href="/ru/">
+        <span>Batumi</span><span class="logo__accent">Motors</span>
+      </a>
+
+      <!-- The burger is visible only on a narrow screen. On a wide one CSS
+           hides it, and the panel below unfolds back into the header row. -->
+      <button class="burger" type="button" aria-label="Основное меню"
+              aria-expanded="false" aria-controls="head-menu">
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+      </button>
+
+      <!-- On a wide screen the .head__menu and .head__tools wrappers get
+           display: contents and vanish from the layout: sections, languages and
+           theme stand straight in the header grid, as if the wrappers were not
+           there. On a narrow screen this is a drop-down panel under the burger. -->
+      <div class="head__menu" id="head-menu">
+
+        <!-- The cross is visible only in the opened drawer: on a wide screen
+             the wrapper dissolves and the button has no business there. -->
+        <button class="drawer-close" type="button" aria-label="Закрыть"></button>
+
+        <nav class="nav" aria-label="Основное меню">
+          <a class="nav__link" href="/ru/cars/">Автопарк</a>
+          <a class="nav__link" href="/ru/deals/">Акции</a>
+          <a class="nav__link is-active" href="/ru/terms/">Условия</a>
+          <a class="nav__link" href="/ru/about/">О нас</a>
+        </nav>
+
+        <div class="head__tools">
+          <nav class="lang" aria-label="Язык сайта">
+            <a class="lang__link is-active" href="/ru/terms/" aria-current="true" hreflang="ru" lang="ru">RU</a>
+            <a class="lang__link" href="/en/terms/" hreflang="en" lang="en">EN</a>
+            <a class="lang__link" href="/ka/terms/" hreflang="ka" lang="ka">KA</a>
+          </nav>
+
+          <button class="theme" type="button" aria-label="Сменить тему">
+            <svg class="theme__sun" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="3.4"></circle>
+              <path d="M8 .9v1.9M8 13.2v1.9M.9 8h1.9M13.2 8h1.9M3.1 3.1l1.35 1.35M11.55 11.55L12.9 12.9M12.9 3.1l-1.35 1.35M4.45 11.55L3.1 12.9"></path>
+            </svg>
+            <svg class="theme__moon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="5"></circle>
+              <path d="M8 3a5 5 0 000 10z" fill="currentColor" stroke="none"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <a class="btn head__cta" href="https://wa.me/995599114024" rel="noopener">Забронировать</a>
+
+    </div>
+  </header>
+  <!--#-->
+
+  <main>
+
+    <section class="section shell">
+
+      <header class="page-head">
+        <h1>Условия аренды</h1>
+        <p class="lead">Всё, что записано в договоре: залог, пробег, топливо, границы, штрафы и что делать при ДТП.</p>
+      </header>
+
+      <div class="blocks">
+        <section class="block">
+          <h2 class="block__title">Требования к водителю</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Минимальный возраст</dt>
+              <dd class="muted">От 21 года.<br>
+              На отдельные автомобили — от 26 лет</dd>
+            </div>
+            <div class="row">
+              <dt>Стаж вождения</dt>
+              <dd class="muted">От 2 лет</dd>
+            </div>
+            <div class="row">
+              <dt>Права</dt>
+              <dd class="muted">Национальные или международные</dd>
+            </div>
+            <div class="row">
+              <dt>Документы</dt>
+              <dd class="muted">Паспорт и водительское удостоверение</dd>
+            </div>
+            <div class="row">
+              <dt>Срок аренды</dt>
+              <dd class="muted">От 1 суток</dd>
+            </div>
+            <div class="row">
+              <dt>Второй водитель</dt>
+              <dd class="muted">Бесплатно</dd>
+            </div>
+            <div class="row">
+              <dt>Пассажиры</dt>
+              <dd class="muted">Не больше, чем предусмотрено производителем автомобиля</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Что включено</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Страховка</dt>
+              <dd class="muted">КАСКО: ДТП, кража, угон, разбой, вандализм, пожар, взрыв, стихийные бедствия.<br>
+              Отдельно застрахована ответственность перед третьими лицами</dd>
+            </div>
+            <div class="row">
+              <dt>Техобслуживание</dt>
+              <dd class="muted">Машина проходит проверку перед каждой выдачей: масло, тормоза, шины, чистота салона</dd>
+            </div>
+            <div class="row">
+              <dt>Поддержка</dt>
+              <dd class="muted">Если что-то случилось на дороге — звоните в любое время, поможем на месте</dd>
+            </div>
+            <div class="row">
+              <dt>Парковка</dt>
+              <dd class="muted">Платные парковки Батуми оплачены — ставьте машину в городе свободно</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Оплата и залог</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Оплата</dt>
+              <dd class="muted">Наличными или переводом.<br>
+              Наличные — лари, евро, доллары</dd>
+            </div>
+            <div class="row">
+              <dt>Залог</dt>
+              <dd class="muted">$100.<br>
+              Возвращается в момент возврата автомобиля, если к вам нет претензий по договору</dd>
+            </div>
+            <div class="row">
+              <dt>Предоплата</dt>
+              <dd class="muted">Не требуется.<br>
+              Бронь подтверждаем по телефону</dd>
+            </div>
+            <div class="row">
+              <dt>Продление</dt>
+              <dd class="muted">Сообщите заранее — пересчитаем тариф по новому сроку</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Доставка и возврат</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Аэропорт Батуми</dt>
+              <dd class="muted">От $9 в одну сторону.<br>
+              Если и получение, и сдача в аэропорту — от $18</dd>
+            </div>
+            <div class="row">
+              <dt>По Батуми</dt>
+              <dd class="muted">От $5 в одну сторону.<br>
+              Если и получение, и сдача по городу — от $10</dd>
+            </div>
+            <div class="row">
+              <dt>Кутаиси</dt>
+              <dd class="muted">$100 в одну сторону.<br>
+              Туда и обратно — $200</dd>
+            </div>
+            <div class="row">
+              <dt>Тбилиси</dt>
+              <dd class="muted">$200 в одну сторону.<br>
+              Туда и обратно — $400</dd>
+            </div>
+            <div class="row">
+              <dt>Другие регионы</dt>
+              <dd class="muted">Оговаривается отдельно</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Пробег и топливо</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Пробег</dt>
+              <dd class="muted">300 км в сутки.<br>
+              При аренде от 3 суток ограничения нет</dd>
+            </div>
+            <div class="row">
+              <dt>Перерасход</dt>
+              <dd class="muted">$0.20 за каждый километр сверх лимита</dd>
+            </div>
+            <div class="row">
+              <dt>Топливо</dt>
+              <dd class="muted">Premium или Super — 95-й и выше, не ниже</dd>
+            </div>
+            <div class="row">
+              <dt>Заправки</dt>
+              <dd class="muted">GULF, WISSOIL, SOCAR, LUKOIL, ROMPETROL</dd>
+            </div>
+            <div class="row">
+              <dt>Уровень топлива</dt>
+              <dd class="muted">При возврате уровень топлива должен быть такой же, как при выдаче.<br>
+              Меньше — $15 за каждую четверть бака</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Где можно ездить</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Территория</dt>
+              <dd class="muted">Дороги общего пользования на территории Грузии</dd>
+            </div>
+            <div class="row">
+              <dt>Выезд за пределы Грузии</dt>
+              <dd class="muted">Запрещён, включая Абхазию и Южную Осетию.<br>
+              При нарушении вся ответственность за автомобиль — на арендаторе, независимо от страховки</dd>
+            </div>
+            <div class="row">
+              <dt>Бездорожье</dt>
+              <dd class="muted">Запрещено.<br>
+              Если запрет нарушен, арендатор оплачивает диагностику подвески и ремонт, если повреждения найдены</dd>
+            </div>
+            <div class="row">
+              <dt>Коммерческое использование</dt>
+              <dd class="muted">Гонки, такси и любая коммерческая эксплуатация запрещены</dd>
+            </div>
+            <div class="row">
+              <dt>Курение</dt>
+              <dd class="muted">В салоне запрещено</dd>
+            </div>
+            <div class="row">
+              <dt>Ремонт</dt>
+              <dd class="muted">Разбирать и ремонтировать машину без нашего согласия нельзя.<br>
+              Замена колеса и ремонт шины — можно</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Штрафы и удержания</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Утеря ключа</dt>
+              <dd class="muted">$200</dd>
+            </div>
+            <div class="row">
+              <dt>Утеря свидетельства о регистрации</dt>
+              <dd class="muted">$100</dd>
+            </div>
+            <div class="row">
+              <dt>Курение в салоне</dt>
+              <dd class="muted">$50</dd>
+            </div>
+            <div class="row">
+              <dt>Возврат немытой машины</dt>
+              <dd class="muted">Машина выдаётся чистой и должна вернуться чистой.<br>
+              Иначе удерживается дополнительно $10</dd>
+            </div>
+            <div class="row">
+              <dt>Химчистка салона</dt>
+              <dd class="muted">$50</dd>
+            </div>
+            <div class="row">
+              <dt>Задержка возврата</dt>
+              <dd class="muted">До 3 часов — $5 за час.<br>
+              Свыше 3 часов — $50 за сутки</dd>
+            </div>
+            <div class="row">
+              <dt>Превышение пробега</dt>
+              <dd class="muted">$0.20 за километр</dd>
+            </div>
+            <div class="row">
+              <dt>Недостача топлива</dt>
+              <dd class="muted">$15 за каждую четверть бака</dd>
+            </div>
+            <div class="row">
+              <dt>Штрафы ПДД</dt>
+              <dd class="muted">Оплачивает арендатор</dd>
+            </div>
+            <div class="row">
+              <dt>Повреждение оборудования</dt>
+              <dd class="muted">Магнитола, динамики, колёса, дворники, зеркала, детское кресло, крепление телефона, стёкла — полная ответственность арендатора</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Если случилось ДТП</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Не перемещайте машину</dt>
+              <dd class="muted">По условиям страховой автомобиль нельзя двигать до приезда полиции</dd>
+            </div>
+            <div class="row">
+              <dt>Позвоните нам первыми</dt>
+              <dd class="muted">Сначала нам, затем, если потребуется, в страховую компанию.<br>
+              По их требованию вызовите полицию по номеру 112</dd>
+            </div>
+            <div class="row">
+              <dt>Когда страховка не сработает</dt>
+              <dd class="muted">Проезд на запрещающий сигнал, пересечение сплошной или двойной сплошной, значительное превышение скорости, управление в состоянии опьянения, оставление места ДТП.<br>
+              В этих случаях страховая вправе отказать в выплате, и ущерб полностью ложится на арендатора</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">Перед выездом</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>Снимите машину на фото</dt>
+              <dd class="muted">До начала аренды зафиксируйте на фото или видео все повреждения кузова и салона.<br>
+              Это защищает вас от спора при возврате</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <aside class="cta-box frame">
+        <h2>Остались вопросы?</h2>
+        <p class="muted">Ответим в WhatsApp или по телефону в любое время суток.</p>
+        <a class="btn" href="https://wa.me/995599114024" rel="noopener">WhatsApp</a>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- FOOTER =============================================================== -->
+  <!--#footer-->
+  <footer class="foot">
+    <div class="shell foot__grid">
+
+      <div>
+        <a class="logo" href="/ru/">
+          <span>Batumi</span><span class="logo__accent">Motors</span>
+        </a>
+        <p class="small muted foot__tag">Аренда автомобилей в Батуми, Грузия</p>
+        <p class="small muted foot__hours">Работаем круглосуточно</p>
+      </div>
+
+      <div>
+        <h2 class="foot__title">Контакты</h2>
+        <ul class="foot__list">
+          <li><a class="foot__link" href="tel:+995599114024">+995 599 114 024</a></li>
+          <li><a class="foot__link" href="https://wa.me/995599114024" rel="noopener">WhatsApp</a></li>
+          <li><a class="foot__link" href="https://instagram.com/batumimotors" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="shell foot__bottom">
+      <p class="small muted">© 2026 Batumi Motors. Батуми, Грузия</p>
+      <p class="small muted foot__made">Made by
+        <a class="foot__link" href="https://ge-developer.tilda.ws" rel="noopener">GE-Developer</a></p>
+    </div>
+  </footer>
+  <!--#-->
+
+  <script src="/assets/js/theme.js" defer></script>
+
+</body>
+</html>

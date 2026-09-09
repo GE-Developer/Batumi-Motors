@@ -1,0 +1,35 @@
+  <!-- The font is loaded ahead of time. Which files depends on the page's
+       language: Cyrillic only on the Russian pages, Georgian only on Georgian. -->
+{fontpreload}
+
+  <!-- The car photos live in Supabase storage, on somebody else's domain.
+       Opening the connection in advance takes the TLS handshake off the first
+       photo — and that is the first thing a person sees in the fleet. -->
+  <link rel="preconnect" href="{photos-origin}">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+{alternates}
+
+  <!-- How the page looks when the link is dropped into WhatsApp or Telegram.
+       The title and description are taken from the page itself, so every car
+       gets its own preview rather than one shared across the site. -->
+{og}
+
+  <script>
+    // The theme is applied BEFORE painting, otherwise a dark page flashes white.
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (e) {}
+
+    // The animation freeze is lifted two frames after the first paint — the
+    // explanation is in style.css, the "Reset" section.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove("preload");
+      });
+    });
+  </script>

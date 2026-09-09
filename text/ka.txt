@@ -1,0 +1,221 @@
+# ═══════════════════════════════════════════════════════════════
+#  ქართული ტექსტი  →  batumimotors.com/ka/…
+#
+#  The keys must match text/ru.txt.
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Menu ────────────────────────────────────────────────────
+nav-cars  = ავტოპარკი
+nav-deals = აქციები
+nav-terms = პირობები
+nav-about = ჩვენ შესახებ
+
+# ─── Buttons ─────────────────────────────────────────────────
+cta = დაჯავშნა
+
+# ─── Footer ──────────────────────────────────────────────────
+tagline         = ავტომობილების ქირაობა ბათუმში, საქართველო
+hours           = ვმუშაობთ 24/7
+copyright       = © 2026 Batumi Motors. ბათუმი, საქართველო
+made-by         = Made by
+footer-contacts = კონტაქტი
+
+# ─── Language switcher ───────────────────────────────────────
+lang-label = საიტის ენა
+
+# nav-label / theme-label — captions for blind users, not visible on screen
+nav-label   = მთავარი მენიუ
+theme-label = თემის შეცვლა
+
+# ═══════════════════════════════════════════════════════════════
+#  FLEET DICTIONARY — the key set must match ru.txt
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Class ───────────────────────────────────────────────────
+class-economy   = ეკონომი
+class-comfort   = კომფორტი
+class-crossover = კროსოვერი
+class-suv       = ჯიპი
+class-premium   = პრემიუმი
+
+# ─── Body ────────────────────────────────────────────────────
+body-sedan     = სედანი
+body-liftback  = ლიფტბეკი
+body-hatchback = ჰეჩბეკი
+body-wagon     = უნივერსალი
+body-crossover = კროსოვერი
+body-suv       = ჯიპი
+body-minivan   = მინივენი
+
+# ─── Transmission ────────────────────────────────────────────
+trans-automatic = ავტომატიკა
+trans-manual    = მექანიკა
+trans-cvt       = ვარიატორი
+
+# ─── Fuel ────────────────────────────────────────────────────
+fuel-petrol   = ბენზინი
+fuel-diesel   = დიზელი
+fuel-hybrid   = ჰიბრიდი
+fuel-electric = ელექტრო
+
+# ─── Fuel grade ──────────────────────────────────────────────
+grade-ai-92  = ბენზინი 92
+grade-ai-95  = ბენზინი 95
+grade-ai-98  = ბენზინი 98
+grade-diesel = დიზელი
+
+# ─── Drive and steering ──────────────────────────────────────
+drive-fwd = წინა წამყვანი
+drive-rwd = უკანა წამყვანი
+drive-awd = სრული წამყვანი
+drive-4wd = სრული წამყვანი 4x4
+steering-left  = მარცხენა საჭე
+steering-right = მარჯვენა საჭე
+
+# ─── Equipment ───────────────────────────────────────────────
+feature-sunroof         = ლუქი
+feature-heated-seats    = სავარძლების გათბობა
+feature-heated-wheel    = საჭის გათბობა
+feature-leather         = ტყავის სალონი
+feature-alcantara       = ალკანტარა
+feature-climate-dual    = ორზონიანი კლიმატ-კონტროლი
+feature-blind-spot      = მკვდარი ზონის სენსორები
+feature-camera-rear     = უკანა ხედვის კამერა
+feature-camera-360      = 360° კამერა
+feature-cruise          = კრუიზ-კონტროლი
+feature-cruise-adaptive = ადაპტური კრუიზ-კონტროლი
+feature-carplay         = Apple CarPlay
+feature-bluetooth       = Bluetooth
+feature-ac              = კონდიციონერი
+feature-parking-sensors = პარკტრონიკი
+feature-roof-rails      = სახურავის რელსები
+feature-isofix          = Isofix სამაგრები
+feature-winter-tires    = ზამთრის საბურავები
+
+# ─── Price and terms ─────────────────────────────────────────
+tariffs-title     = ფასი დღეში
+price-from        = დღეში #-დან
+deposit-none      = დეპოზიტის გარეშე
+mileage-unlimited = გარბენის შეზღუდვის გარეშე
+
+# ─── Words with numbers ──────────────────────────────────────────
+# Georgian puts the singular after a numeral,
+# so all three forms coincide. That is how it should be.
+seats-one = ადგილი
+seats-few = ადგილი
+seats-many = ადგილი
+
+# ─── Photos ──────────────────────────────────────────────────────
+photo-alt  = # ქირავდება ბათუმში
+photo-soon = ფოტო მალე დაემატება
+
+# The text WhatsApp opens with. The hash is replaced by the make and year.
+wa-text = გამარჯობა! მაინტერესებს #
+
+# ═══════════════════════════════════════════════════════════════
+#  CAR PAGE DICTIONARY — the key set must match ru.txt
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Tab title and description for Google ─────────────────────
+car-title = # ქირავდება ბათუმში | Batumi Motors
+car-meta  = # ქირავდება ბათუმში. ფასი დღეში, მიწოდება ქალაქსა და აეროპორტში, დაჯავშნა WhatsApp-ით.
+
+# ─── Crumbs and section headings ───────────────────────────────
+crumbs-label       = ნავიგაციის ბილიკი
+description-title  = აღწერა
+specs-title        = მახასიათებლები
+features-title     = აღჭურვილობა
+car-terms-title    = პირობები ამ მანქანისთვის
+
+# ─── Spec labels ───────────────────────────────────────────────
+spec-class        = კლასი
+spec-body         = ძარის ტიპი
+spec-transmission = ტრანსმისია
+spec-drive        = წამყვანი
+spec-steering     = საჭე
+spec-seats        = ადგილები
+spec-doors        = კარები
+spec-fuel         = საწვავის ტიპი
+spec-fuel-grade   = საწვავის მარკა
+spec-engine       = ძრავის მოცულობა
+spec-power        = სიმძლავრე
+spec-torque       = ბრუნვის მომენტი
+spec-acceleration = აჩქარება 100 კმ/სთ-მდე
+spec-consumption  = საწვავის ხარჯვა
+spec-tank         = საწვავის ბაკი
+spec-trunk        = საბარგული
+spec-clearance    = კლირენსი
+spec-weight       = წონა
+
+# ─── Units (the hash is the number itself) ─────────────────────
+unit-l            = # ლ
+unit-power        = # ცხ.ძ.
+unit-torque       = # ნ·მ
+unit-acceleration = # წმ
+unit-consumption  = # ლ/100 კმ-ზე
+unit-clearance    = # მმ
+unit-weight       = # კგ
+
+# ─── Doors: number + word (singular after a numeral) ──────────
+
+# ─── Terms for this car ────────────────────────────────────────
+deposit-title          = დეპოზიტი
+terms-min-age          = მინიმალური ასაკი
+terms-experience       = მართვის სტაჟი
+terms-mileage          = გარბენი
+terms-insurance        = დაზღვევა
+terms-delivery-city    = მიწოდება ქალაქში
+terms-delivery-airport = მიწოდება აეროპორტში
+terms-cross-border     = საზღვრის გადაკვეთა
+terms-note             = პირობები ამ ავტომობილისთვისაა მითითებული. სხვა მანქანებზე ისინი შეიძლება განსხვავდებოდეს.
+
+delivery-free = უფასოდ
+
+# In Georgian a numeral is always followed by the singular — all three
+# forms coincide, as in seats-one/few/many above.
+age-from-one  = # წლიდან
+age-from-few  = # წლიდან
+age-from-many = # წლიდან
+
+experience-from-one  = # წელზე მეტი
+experience-from-few  = # წელზე მეტი
+experience-from-many = # წელზე მეტი
+
+mileage-per-day   = დღეში # კმ
+mileage-free-from = # დღიდან შეზღუდვის გარეშე
+
+insurance-kasko = სრული დაზღვევა (KASKO)
+
+cross-border-allowed   = დაშვებულია
+cross-border-forbidden = აკრძალულია
+
+# ─── End of the page ───────────────────────────────────────────
+cta-box-title = მზად ხართ დასაჯავშნად?
+cta-box-text  = გიპასუხებთ WhatsApp-ში ან ტელეფონით დღე-ღამის ნებისმიერ დროს.
+
+# ═══════════════════════════════════════════════════════════════
+#  THE CALCULATOR ON A CAR PAGE
+#  The hash # is the place for the number the script substitutes.
+# ═══════════════════════════════════════════════════════════════
+calc-title    = ღირებულების გამოთვლა
+calc-days     = ქირავნობის ვადა, დღე
+calc-pickup     = მიღება
+calc-return     = დაბრუნება
+calc-rent     = ქირავნობა
+calc-discount = ფასდაკლება
+calc-delivery = მიწოდება
+calc-total    = ჯამი
+calc-free     = უფასოდ
+calc-deposit  = დეპოზიტი # — უბრუნდებათ მანქანის ჩაბარებისას
+calc-note     = სხვა რეგიონებში მიწოდების ფასს მენეჯერი გეტყვით.
+close       = დახურვა
+photo-prev  = წინა ფოტო
+photo-next  = შემდეგი ფოტო
+calc-legal    = გაანგარიშება წინასწარია და არ წარმოადგენს საჯარო ოფერტას. საბოლოო ღირებულებას ჯავშნისას ადასტურებს მენეჯერი.
+place-city    = ბათუმში
+place-airport = ბათუმის აეროპორტი
+place-kutaisi = ქუთაისი
+place-tbilisi = თბილისი
+place-other   = სხვა რეგიონი — შეთანხმებით
+place-none  = მიწოდების გარეშე
+wa-days       = ქირავნობის ვადა: # დღე

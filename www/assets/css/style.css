@@ -1,0 +1,1988 @@
+/* Batumi Motors — site styles
+   1 font · 2 variables · 3 reset · 4 text · 5 layout · 6 buttons
+   7 details · 8 header · 9 footer · 10 home · 11 car cards
+   12 car page · 13 terms, deals, about · 14 the 404 page
+
+   DESIGN LANGUAGE: "Road markings".
+   The site speaks the language of road infrastructure — the kind a person is
+   about to drive on. The yellow plate of a sign, dashed markings, kilometre
+   notches, the blue stripe of a number plate, direction chevrons.
+
+   Three project-level rules that must not be broken:
+
+   1. NOT ONE text-transform: uppercase. Georgian script has no capitals at all,
+      and caps simply does not work there — the ka version starts to look like a
+      different site. Hierarchy is held by size, weight, colour and the plate.
+   2. Yellow is NEVER a text colour. Only a fill under dark text. That is why it
+      is the same in both themes and physically cannot fail contrast: 13:1 either
+      way.
+   3. The radius is either 20px (that is "a sign plate") or 0 (that is "a table, a
+      divider, road markings"). There are no values in between — those are exactly
+      what reads as "somebody forgot to set this". */
+
+
+/* 1. FONT ------------------------------------------------------------------ */
+/* Nunito — a classic humanist typeface with rounded stroke terminals. Variable:
+   one file covers every weight from 400 to 800, with no separate bold files
+   needed.
+
+   Georgian is set in Noto Sans Georgian and declared under THE SAME family name.
+   The browser picks the file by character range on its own, so nothing has to
+   change in any other rule, and a Russian page does not download Georgian glyphs.
+
+   Why a pair rather than one typeface: on Google Fonts only three families out of
+   nearly two thousand support Georgian, and not one of them is rounded. The pair
+   is not a compromise here: mkhedruli script is round by nature and has no
+   capitals, so it sits better with rounded Latin than with an angular grotesque.
+
+   font-display: block — do not change. With swap the text redraws in front of
+   your eyes; with optional element widths wander between pages.
+
+   The SIL OFL licences are next to the files: fonts/Nunito-OFL.txt */
+
+@font-face {
+  font-family: "Nunito";
+  font-weight: 400 800;
+  font-display: block;
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Nunito";
+  font-weight: 400 800;
+  font-display: block;
+  src: url("../fonts/nunito-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: "Nunito";
+  font-weight: 400 800;
+  font-display: block;
+  src: url("../fonts/nunito-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* Georgian — Noto Sans Georgian under the same family name */
+@font-face {
+  font-family: "Nunito";
+  font-weight: 400 700;
+  font-display: block;
+  src: url("../fonts/noto-georgian.woff2") format("woff2");
+  unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A,
+    U+2D00-2D2F, U+2E31;
+}
+
+
+/* 2. VARIABLES ------------------------------------------------------------- */
+/* Colours are never written in the markup — only var(--name).
+
+   The palette is a road palette. Asphalt holds the structure, sign yellow places
+   the accents, number-plate blue works as a link, sign green as a saving.
+
+   Why yellow solves the problem that gold and neon broke on: it does not claim to
+   be a text colour. It is a backing. So --accent is THE SAME hex in the light and
+   dark themes, and in both it gives 13:1 under black text. There is no need to
+   pick a "light variant of the accent" any more, and it cannot fail contrast in
+   principle.
+
+   Hence the discipline: no more than a tenth of the screen is yellow. Section
+   headings, the price, one main button. That is all. */
+
+:root {
+  --bg: #f2f3f1;
+  --bg-deep: #e9ebe8;
+  --surface: #ffffff;
+  --fg: #0f1113;
+  --muted: #5f6569;
+  --line: #a2a8a3;      /* panel edges — visible, a sign has an outlined edge */
+  --line-soft: #dfe3df;  /* internal dividers — quiet */
+
+  /* A dark block in the middle of a light page. One such plate holds the
+     screen better than ten thin frames. */
+  --inverse-bg: #0f1113;
+  --inverse-fg: #f2f3f1;
+
+  /* The sign. Fill only, never text. */
+  --accent: #ffcc00;
+  --accent-ink: #0f1113;
+  --accent-soft: rgba(255, 204, 0, .22);
+
+  /* Number-plate blue — the accent in the role of TEXT and outline.
+     Sign green — for savings only: a discount, "included". */
+  --mark: #1a4f9c;
+  --good: #0a6b45;
+
+  --shadow-1: 0 1px 2px rgba(15, 17, 19, .06),
+              0 6px 16px -8px rgba(15, 17, 19, .14);
+  --shadow-2: 0 2px 4px rgba(15, 17, 19, .07),
+              0 16px 34px -14px rgba(15, 17, 19, .2),
+              0 44px 80px -50px rgba(15, 17, 19, .3);
+
+  --bg-head: color-mix(in srgb, var(--bg) 80%, transparent);
+
+  --shell: 1340px;
+  --head-h: 78px;
+  --gutter: 22px;
+
+  /* Two values and nothing between them: a sign plate or a right angle. */
+  --radius: 20px;
+
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --fast: .2s var(--ease);
+  --slow: .45s var(--ease);
+
+  color-scheme: light;
+}
+
+/* Dark theme: a night road. Yellow is the very same here too.
+   The set is declared twice, by system setting and by button: @media and the
+   attribute live in different planes and cannot be gathered into one selector. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101314;
+    --bg-deep: #0a0d0e;
+    --surface: #191d1e;
+    --fg: #eef0ee;
+    --muted: #949b9d;
+    --line: #4a5254;
+    --line-soft: #23292b;
+
+    --inverse-bg: #191d1e;
+    --inverse-fg: #eef0ee;
+
+    --accent: #ffcc00;
+    --accent-ink: #0f1113;
+    --accent-soft: rgba(255, 204, 0, .16);
+
+    --mark: #7fa9e8;
+    --good: #4cc191;
+
+    --shadow-1: 0 1px 0 rgba(238, 240, 238, .05) inset,
+                0 10px 30px -18px rgba(0, 0, 0, .9);
+    --shadow-2: 0 1px 0 rgba(238, 240, 238, .06) inset,
+                0 30px 70px -40px rgba(0, 0, 0, 1);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #101314;
+  --bg-deep: #0a0d0e;
+  --surface: #191d1e;
+  --fg: #eef0ee;
+  --muted: #949b9d;
+  --line: #4a5254;
+  --line-soft: #23292b;
+
+  --inverse-bg: #191d1e;
+  --inverse-fg: #eef0ee;
+
+  --accent: #ffcc00;
+  --accent-ink: #0f1113;
+  --accent-soft: rgba(255, 204, 0, .16);
+
+  --mark: #7fa9e8;
+  --good: #4cc191;
+
+  --shadow-1: 0 1px 0 rgba(238, 240, 238, .05) inset,
+              0 10px 30px -18px rgba(0, 0, 0, .9);
+  --shadow-2: 0 1px 0 rgba(238, 240, 238, .06) inset,
+              0 30px 70px -40px rgba(0, 0, 0, 1);
+
+  color-scheme: dark;
+}
+
+@media (min-width: 768px)  { :root { --gutter: 44px; } }
+@media (min-width: 1200px) { :root { --gutter: 72px; } }
+
+
+/* 3. RESET ----------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+/* There is deliberately nothing about scrolling here: scroll-behavior and
+   scrollbar-gutter broke scrollbar behaviour in Safari. */
+
+body {
+  position: relative;
+  background-color: var(--bg);
+  background-image: linear-gradient(to bottom, transparent 60%, var(--bg-deep));
+  background-repeat: no-repeat;
+  color: var(--fg);
+  font-family: "Nunito", system-ui, -apple-system, sans-serif;
+  font-size: 1.0625rem;   /* not px: the site grows along with the browser's setting */
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  text-wrap: pretty;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+main { flex: 1; }
+
+img, svg { display: block; max-width: 100%; height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; padding: 0; }
+
+/* Without this line the hidden attribute does not work where an element has been
+   given a display. Because of that the "Discount" and "Delivery" rows in the
+   calculator were always shown, even when empty. */
+[hidden] { display: none !important; }
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+* { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--muted); background-clip: content-box; }
+
+/* The outline when tabbing with the keyboard. Blue, not yellow: yellow on a
+   light background gives 1.1:1 and the outline is simply invisible. */
+:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 3px;
+}
+
+/* Transitions are off while loading: otherwise a button under the cursor jerks on
+   the first paint. Keyframes are NOT switched off — the entrance has to start on
+   the first frame, otherwise you see the finished page fade out and appear again.
+   The class is removed by the script in <head>. */
+html.preload *, html.preload *::before, html.preload *::after {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Page transition: the browser blends the old frame into the new one itself,
+   without a single line of JS. The header is named separately — it is identical
+   everywhere and stands at one point on the screen, so it stays put. The footer is
+   deliberately NOT given a name: it is at the end of the page, pages differ in
+   length, and a named footer would travel across the whole screen. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+
+.head { view-transition-name: head; }
+
+::view-transition-old(root) { animation: page-out .2s var(--ease) both; }
+::view-transition-new(root) { animation: page-in .34s var(--ease) both; }
+
+@keyframes page-out { to   { opacity: 0; } }
+@keyframes page-in  { from { opacity: 0; transform: translateY(10px); } }
+
+
+/* 4. TEXT ------------------------------------------------------------------ */
+/* Two weights, 400 and 700, and not a single instance of caps. Hierarchy is built
+   from size, weight and the plate — that is, from what works identically in
+   Cyrillic, in Latin and in Georgian. */
+
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.125rem, 1.4rem + 3.2vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -.03em;
+}
+
+h2 { font-size: clamp(1.375rem, 1.15rem + 1.1vw, 2rem); }
+
+h3 {
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+}
+
+p { text-wrap: pretty; }
+
+/* An eyebrow heading. Not caps but a lowercase caption with a yellow notch — the
+   same device that marks off a direction on a road sign. */
+.eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: .7em;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--muted);
+}
+.eyebrow::before {
+  content: "";
+  align-self: center;
+  flex: none;
+  width: 22px;
+  height: 10px;
+  background: var(--accent);
+}
+
+.lead {
+  font-size: clamp(1.0625rem, 1rem + .35vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.muted { color: var(--muted); }
+
+.small {
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+/* The price. Tabular figures are mandatory: without them the tariff column dances
+   on ones and sevens every time the calculator recomputes. */
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .12em;
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+}
+
+.price__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--fg);
+}
+
+.price__value--gap-left  { margin-left: .18em; }
+.price__value--gap-right { margin-right: .18em; }
+
+.prose { max-width: none; }
+.prose h2 { margin-bottom: 1.1rem; }
+.prose p + p { margin-top: 1.1rem; }
+/* The whole description is one colour. The first paragraph used to be darker than
+   the rest — the "way into reading" device — but with no caption it reads as a
+   randomly highlighted chunk. The colour is the main one: the description is the
+   content of the page, not a note attached to it. */
+.prose p { color: var(--fg); line-height: 1.7; }
+
+
+/* 5. LAYOUT ---------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: clamp(3rem, 5.5vw, 6rem); }
+
+/* The page header. Below it — road markings instead of an ordinary rule. */
+.page-head {
+  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
+  position: relative;
+}
+.page-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: clamp(64px, 12vw, 120px);
+  height: 5px;
+  background: var(--accent);
+}
+.page-head h1 + .lead,
+.page-head h1 + .chips { margin-top: 1.1rem; }
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 4.5vw, 4rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* A "term — value" row. The basis of the terms and the specs.
+   No radius: this is a table, and a table means a right angle. */
+.rows { display: flex; flex-direction: column; }
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .3rem;
+  padding-block: .7rem;
+}
+.row dt { font-weight: 700; }
+.row dd { color: var(--muted); }
+
+@media (min-width: 720px) {
+  .row {
+    grid-template-columns: minmax(180px, 27%) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+/* A sign panel: an opaque surface with a 20px rounding. Opaque on principle —
+   translucent glass over a light background differs by three per cent in
+   brightness, and the panel is simply not visible. */
+.frame {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+}
+
+
+/* 6. BUTTONS --------------------------------------------------------------- */
+/* The main button — a yellow sign with dark text. Lowercase: there is no caps
+   anywhere on the site. The chevron at the end shows direction and steps forward
+   on hover. */
+
+.btn {
+  --btn-pad: .85em 1.5em;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6em;
+  min-width: 9.5rem;
+  padding: var(--btn-pad);
+  border: 2px solid transparent;
+  /* The button is rounded like a sign plate, not like a pill: at a height of
+     about 46px a 20px radius turns it into an oval. */
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  text-align: center;
+  cursor: pointer;
+  color: var(--accent-ink);
+  background: var(--accent);
+  transition: background-color var(--fast), color var(--fast),
+              border-color var(--fast), transform var(--fast),
+              box-shadow var(--fast);
+}
+
+.btn::after {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--fast);
+}
+
+.btn:hover {
+  background: color-mix(in srgb, var(--accent) 84%, #000);
+  box-shadow: var(--shadow-1);
+}
+.btn:hover::after { transform: rotate(45deg) translate(3px, -3px); }
+.btn:active { transform: translateY(1px); }
+
+/* The secondary button — outline only. There is exactly one yellow fill on the
+   page: make it many and the sign stops pointing. */
+.btn--ghost {
+  color: var(--fg);
+  background: transparent;
+  border-color: var(--line);
+}
+.btn--ghost:hover {
+  color: var(--fg);
+  background: transparent;
+  border-color: var(--fg);
+  box-shadow: none;
+}
+
+.btn--wide { width: 100%; }
+
+
+/* 7. DETAILS --------------------------------------------------------------- */
+
+/* Spec chips: small sign plates, lowercase. */
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: .3em .7em;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: .8125rem;
+  line-height: 1.3;
+  color: var(--muted);
+  background: var(--bg);
+  transition: border-color var(--fast), color var(--fast);
+}
+
+/* Breadcrumbs — like a sign pointing back the way you came */
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+  font-size: .9375rem;
+}
+.crumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--mark);
+  transition: opacity var(--fast);
+}
+.crumbs a::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+.crumbs a:hover { opacity: .7; }
+
+.photo { width: 100%; height: 100%; object-fit: cover; }
+
+/* The place for a photo while there is none. Not a grey frame with the word
+   "soon" but a piece of road: dark asphalt with a centre line. The caption is
+   small and at the bottom — it states a fact rather than filling the frame. */
+.photo--empty {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  padding: .9rem 1rem;
+  font-size: .8125rem;
+  line-height: 1.3;
+  color: rgba(238, 240, 238, .55);
+  background: #16191a;
+  overflow: hidden;
+}
+.photo--empty::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70% 60% at 50% 42%,
+      rgba(238, 240, 238, .07), transparent 70%);
+}
+
+.list-title { margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
+
+.list-note {
+  margin-top: 1.25rem;
+  color: var(--muted);
+}
+
+.list-cta { margin-top: clamp(1.75rem, 3.5vw, 2.75rem); }
+
+/* Appearing on scroll — tied to the position on the page, not to a timer.
+   No JS. Where the device is unsupported, everything is visible at once. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .grid > li,
+    .deals > li,
+    .why > li,
+    .blocks > *,
+    .band,
+    .stats,
+    .car-top,
+    .cta-box {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 2% cover 18%;
+    }
+    .grid > li:nth-child(3n + 2),
+    .deals > li:nth-child(4n + 2) { animation-range: entry 2% cover 23%; }
+    .grid > li:nth-child(3n + 3),
+    .deals > li:nth-child(4n + 3) { animation-range: entry 2% cover 28%; }
+    .deals > li:nth-child(4n + 4) { animation-range: entry 2% cover 33%; }
+  }
+}
+
+
+/* 8. HEADER ---------------------------------------------------------------- */
+
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--line);
+}
+
+/* The background and the blur are moved onto a pseudo-element rather than left on
+   the header itself. The reason is strict: an element with backdrop-filter becomes
+   the reference point for everything positioned fixed inside it. Verified — a test
+   element with position: fixed inside the header measured 390×66 instead of
+   390×844, meaning the panel that slides in from the side would be locked into the
+   header strip. On a pseudo-element the blur works exactly the same, and the header
+   stops being a cage. Visually nothing changes. */
+.head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg-head);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+}
+
+.head__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "logo . burger";
+  align-items: center;
+  column-gap: clamp(.75rem, 2vw, 1.75rem);
+  padding-block: .8rem;
+}
+
+/* min-width, so the logo's width does not wander between pages */
+.logo {
+  grid-area: logo;
+  min-width: 9.5rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.logo span + span { margin-left: .3em; }
+
+/* The second half of the name — on a yellow plate. The logo is a sign. */
+.logo__accent {
+  padding: .12em .43em .12em .4em;
+  border-radius: 6px;
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.nav {
+  grid-area: nav;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block: .45rem;
+  margin-top: .3rem;
+  border-top: 1px solid var(--line-soft);
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.nav__link {
+  position: relative;
+  padding-block: .3rem;
+  font-size: .9375rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color var(--fast);
+}
+/* The active item is marked with a stripe, NOT with weight: bold is wider, and
+   neighbouring items slide sideways when moving between pages. */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--fast);
+}
+.nav__link:hover { color: var(--fg); }
+.nav__link:hover::after,
+.nav__link.is-active::after { transform: scaleX(1); }
+.nav__link.is-active { color: var(--fg); }
+
+.lang {
+  grid-area: lang;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: .1rem;
+}
+
+.lang__link {
+  padding: .2rem .5rem;
+  border-radius: 6px;
+  font-size: .875rem;
+  line-height: 1.2;
+  color: var(--muted);
+  transition: color var(--fast), background-color var(--fast);
+}
+.lang__link:hover { color: var(--fg); }
+.lang__link.is-active {
+  color: var(--accent-ink);
+  background: var(--accent);
+  font-weight: 700;
+}
+
+/* The burger button. Lives only on a narrow screen: on a wide one a media query
+   hides it, and the panel below unfolds back into the header row. */
+.burger {
+  grid-area: burger;
+  justify-self: end;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color var(--fast);
+}
+.burger:hover,
+.burger[aria-expanded="true"] { border-color: var(--fg); }
+
+.burger__bar {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* The panel with the sections, languages and theme.
+
+   On a wide screen the wrappers get display: contents and drop out of the layout:
+   .nav, .lang and .theme stand straight in the header grid by their own
+   grid-areas, as if the wrappers were not there at all. So a wide screen looks
+   exactly as it did before the burger existed. */
+/* By default the wrappers are dissolved: .nav, .lang and .theme stand straight in
+   the header grid by their own grid-areas, as if the wrappers were not there. The
+   narrow screen below turns the panel into a drawer sliding in from the side. */
+.head__menu,
+.head__tools { display: contents; }
+
+/* The cross is needed only by the opened drawer. On a wide screen the wrapper is
+   dissolved, and the button would become one more element in the header grid. */
+.drawer-close { display: none; }
+
+.theme {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color var(--fast), border-color var(--fast);
+}
+.theme:hover { color: var(--fg); border-color: var(--fg); }
+.theme__sun, .theme__moon {
+  grid-area: 1 / 1;
+  transition: opacity var(--fast), transform var(--slow);
+}
+.theme__sun  { opacity: 0; transform: rotate(-90deg) scale(.6); }
+.theme__moon { opacity: 1; transform: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme__sun  { opacity: 1; transform: none; }
+  :root:not([data-theme="light"]) .theme__moon { opacity: 0; transform: rotate(90deg) scale(.6); }
+}
+:root[data-theme="dark"] .theme__sun  { opacity: 1; transform: none; }
+:root[data-theme="dark"] .theme__moon { opacity: 0; transform: rotate(90deg) scale(.6); }
+
+/* The header button is hidden on a narrow screen — there is no room for it there,
+   and it pushed the menu past the edge. min-width keeps the width constant so the
+   header does not jerk when switching languages. */
+.head__cta {
+  display: none;
+  --btn-pad: .6em 1.1em;
+  min-width: 10.5rem;
+  font-size: .9375rem;
+}
+
+/* 1000px, not 900: at 900 the last menu item was clipped. */
+@media (min-width: 1000px) {
+  .head__row {
+    grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+    grid-template-areas: "logo nav lang theme cta";
+    padding-block: 1rem;
+  }
+  /* Both forms are written deliberately: .is-open stays on the panel if the window
+     was widened with the menu open, and without the second selector it would
+     override display: contents through higher specificity. */
+  /* .is-open is listed deliberately: if the window was widened with the drawer
+     open, without it the class would override display: contents and the header
+     would fall apart. */
+  .head__menu.is-open { display: contents; }
+  .burger { display: none; }
+  .theme { grid-area: theme; }
+  .nav {
+    justify-content: center;
+    overflow: visible;
+    padding-block: 0;
+    margin-top: 0;
+    border-top: 0;
+  }
+  .head__cta { grid-area: cta; display: inline-flex; }
+}
+
+@media (max-width: 999px) {
+  /* The drawer slides in from the right, the side the burger is on.
+
+     The dimming behind it is done with a shadow of enormous spread rather than a
+     separate element: no extra markup is needed, and a click outside the drawer is
+     caught by the handler on the document anyway. */
+  .head__menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: min(320px, 84vw);
+    padding: 1.15rem;
+    background: var(--surface);
+    border-left: 1px solid var(--line);
+    box-shadow: 0 0 0 100vmax rgba(8, 10, 6, 0);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(100%);
+    visibility: hidden;
+  }
+  .head__menu.is-open {
+    transform: none;
+    visibility: visible;
+    box-shadow: 0 0 0 100vmax rgba(8, 10, 6, .45);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .head__menu {
+      transition: transform var(--slow), visibility var(--slow),
+                  box-shadow var(--slow);
+    }
+  }
+
+  /* Closing with no animation — set by the script as the page leaves. Its
+     specificity is higher than that of the rule with the transition, so it
+     overrides it regardless of which media query that one sits in. */
+  .head__menu.is-instant { transition: none; }
+
+  /* Inside the panel the sections run in a column across the full width rather
+     than in a row with sideways scrolling, as in the old header. */
+  .head__menu .nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    overflow: visible;
+    margin-top: 0;
+    padding-block: 0;
+    border-top: 0;
+  }
+  .head__menu .nav__link {
+    padding-block: .75rem;
+    font-size: 1rem;
+  }
+
+  /* Languages and theme — one row at the very bottom of the panel. */
+  .drawer-close {
+    position: relative;
+    display: block;
+    align-self: flex-end;
+    width: 40px;
+    height: 40px;
+    margin-bottom: .5rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .drawer-close::before,
+  .drawer-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    margin: -1px 0 0 -8px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+  .drawer-close::before { transform: rotate(45deg); }
+  .drawer-close::after  { transform: rotate(-45deg); }
+
+  .head__tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-soft);
+  }
+}
+
+
+/* 9. FOOTER ---------------------------------------------------------------- */
+
+.foot {
+  margin-top: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2.5rem, 4.5vw, 4rem);
+  border-top: 1px solid var(--line-soft);
+}
+
+.foot__grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2.25rem, 4vw, 3.25rem);
+}
+
+@media (min-width: 720px) {
+  /* Two columns: the name with its caption, and the contacts. The third,
+     "Sections", has been removed — those links are already in the header. */
+  .foot__grid { grid-template-columns: 1.6fr 1fr; gap: 3rem; }
+  /* The line limit lives only here. Below, the footer is one column across the
+     full width of the screen, and this same limit used to break the caption
+     before the edge. */
+  .foot__tag { max-width: 34ch; }
+}
+
+.foot__tag { margin-top: 1rem; }
+.foot__hours { margin-top: .4rem; }
+
+/* A column caption: a yellow notch instead of caps */
+.foot__title {
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  font-size: .9375rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.foot__title::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 8px;
+  background: var(--accent);
+}
+
+.foot__list {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  font-size: .9375rem;
+}
+
+.foot__link { color: var(--muted); transition: color var(--fast); }
+.foot__link:hover { color: var(--fg); text-decoration: underline; }
+
+.foot__bottom {
+  padding-block: 1.4rem;
+  text-align: center;
+}
+
+.foot__made { margin-top: .35rem; }
+
+
+/* 10. HOME ----------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  /* The text is pushed to the top rather than centred vertically, and the top
+     padding is exactly the same as on .section. That way the gap from the header
+     to the heading on the home page matches the other pages — the content used to
+     sit in the middle of a tall cover and the heading slid a hundred points down.
+     The drawing of the car is still centred: it is in its own .hero__media layer
+     and has nothing to do with this alignment. */
+  align-items: start;
+  min-height: min(78svh, 820px);
+  padding-block: clamp(3rem, 5.5vw, 6rem);
+  overflow: hidden;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.car-line { width: min(1500px, 120%); height: auto; }
+
+.car-line path,
+.car-line circle {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: .16;
+}
+.car-line__soft  { opacity: .1; }
+.car-line__faint { opacity: .06; }
+.car-line__trace { opacity: 0; }
+
+.hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(62% 76% at 26% 50%,
+      var(--bg) 0%,
+      color-mix(in oklab, var(--bg) 78%, transparent) 42%,
+      transparent 76%);
+}
+
+.hero__inner { position: relative; z-index: 3; width: 100%; }
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+
+.hero__text h1 {
+  font-size: clamp(2.125rem, 1.2rem + 4vw, 4.5rem);
+  max-width: 18ch;
+}
+
+.hero__text .lead { max-width: 46ch; }
+
+/* Three steps on the cover: message us → collect the keys → drive.
+
+   The plates are the same as on the theme button and the burger: a 1px border,
+   rounded like a road sign. The arrows between them are yellow — the only accent,
+   and it leads the eye left to right through the order of actions. The icons are
+   drawn with the same line weight as the car in the background. */
+.steps {
+  --steps-gap: clamp(.9rem, 2.4vw, 1.75rem);
+  --plate: 56px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--steps-gap);
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .55rem;
+  width: 5.75rem;
+  text-align: center;
+  font-size: .9375rem;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.step__plate {
+  display: grid;
+  place-items: center;
+  width: var(--plate);
+  height: var(--plate);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+/* The arrow sits exactly in the middle of the gap and at the height of the plate's centre. */
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  /* Exactly at the height of the plate's centre, whatever size the plate is. */
+  top: calc(var(--plate) / 2);
+  left: 100%;
+  width: 9px;
+  height: 9px;
+  margin-left: calc(var(--steps-gap) / 2 - 5px);
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* The line after the chain of steps. The chain ends with the word "drive", and
+   here the text answers the question the picture has just asked. */
+/* On the narrowest screens the chain wrapped onto two lines, and the arrow
+   between the second and third steps hung there pointing at nothing. We squeeze
+   the plates and the gaps so the three steps always stand in one row. */
+@media (max-width: 400px) {
+  .steps {
+    --steps-gap: .55rem;
+    --plate: 48px;
+  }
+  .step {
+    width: 4.6rem;
+    font-size: .8125rem;
+  }
+}
+
+.hero__note { margin-top: clamp(1.25rem, 2.5vw, 1.75rem); }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* On a narrow screen the drawing moves down and grows wider than the screen: a
+   car squeezed to the width of a phone turns into a smudge behind the text. */
+@media (max-width: 899px) {
+  .hero__media { place-items: end center; }
+  .car-line { width: 180%; margin-bottom: -3%; }
+  .hero__media::after {
+    background: radial-gradient(88% 42% at 50% 40%,
+        var(--bg) 0%,
+        color-mix(in oklab, var(--bg) 80%, transparent) 48%,
+        transparent 82%);
+  }
+}
+
+/* A section heading — a yellow sign plate. This is the replacement for caps: it
+   gives the same "signpost" quality but works in all three languages, Georgian
+   included, where capital letters do not exist. */
+.band {
+  display: flex;
+  flex-direction: column;
+  /* Pushing left is what the HEADING needs: it sits on a yellow plate, and a plate
+     stretched across the full width would look like a stripe. It hurt the
+     subheading — that shrank to its own text (375 points out of 1196 available)
+     and broke onto a second line in the middle of empty space, while on the other
+     pages the same text runs across the full width. */
+  align-items: flex-start;
+  gap: .9rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.band .lead { align-self: stretch; }
+
+.band__title,
+.block__title,
+.list-title {
+  display: inline-block;
+  /* Less on top than at the bottom: capitals and figures sit on the baseline, and
+     below it room is left for descenders. We centre by cap height rather than by
+     the edges of the ink — that is how text is set on a real road sign. On the
+     right there is an addition for the tracking. */
+  padding: .066em .53em .234em .5em;
+  border-radius: 10px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  font-size: clamp(1.375rem, 1.1rem + 1.3vw, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.15;
+}
+
+
+/* 11. CAR CARDS ------------------------------------------------------------ */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  /* The card is declared independent: neither its layout nor its painting should
+     touch its neighbours. paint alone is not enough — it is nearly guaranteed by
+     the overflow: hidden that is already here; the gain comes from layout.
+     Visually it changes nothing, we have no descendants past the card's edge. */
+  contain: layout paint;
+  box-shadow: var(--shadow-1);
+  transition: transform var(--slow), border-color var(--fast),
+              box-shadow var(--slow);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fg);
+  box-shadow: var(--shadow-2);
+}
+
+.card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #16191a;
+}
+.card__media .photo { transition: transform var(--slow); }
+
+/* There is deliberately NO will-change here, and that is the result of analysis,
+   not forgetfulness.
+
+   There was an attempt to lift the photos into separate layers on :hover of the
+   grid itself. It came out worse: .grid takes up almost the whole page, so while
+   scrolling the cursor is practically always inside it — and the layer was lifted
+   for ALL photos at once rather than for the hovered one. On top of that, every
+   entry and exit of the cursor created and immediately destroyed nine layers, and
+   that is expensive one-off work.
+
+   The argument itself was wrong too: the rule about re-rasterising on a change of
+   scale applies to transforms from script, and CSS transitions are excluded from
+   it. For transition: transform, lifting a layer gives almost nothing. */
+.card:hover .card__media .photo { transform: scale(1.04); }
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  flex: 1;
+  padding: clamp(1rem, 2vw, 1.35rem);
+}
+
+/* The car's name is set like a number plate: a blue stripe on the left. */
+.card__name {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding-left: .75rem;
+  border-left: 7px solid var(--accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.card__name a { transition: color var(--fast); }
+.card:hover .card__name a { color: var(--mark); }
+
+/* The whole card is clickable, not just the name. The link on the car's name is
+   stretched across the whole card with a pseudo-element — the markup does not have
+   to be touched, and the link's accessible name stays as it was: a screen reader
+   still announces the make and model rather than "link". The WhatsApp button is
+   raised above this layer so it stays a separate target. The price of the device:
+   text inside the card cannot be selected with the mouse. */
+.card__name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.card__more {
+  position: relative;
+  z-index: 2;
+}
+
+.card__year {
+  margin-left: .45em;
+  font-size: .9375rem;
+  font-weight: 400;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.card__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.card__foot .price__value { font-size: 1.625rem; }
+
+.card__more {
+  --btn-pad: .55em 1em;
+  min-width: 0;
+  font-size: .9375rem;
+}
+
+
+/* 12. CAR PAGE ------------------------------------------------------------- */
+
+.car-year {
+  margin-left: .4em;
+  font-size: clamp(1rem, .7rem + .8vw, 1.5rem);
+  font-weight: 400;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.car-top {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(2.25rem, 4.5vw, 4rem);
+}
+
+@media (min-width: 1000px) {
+  .car-top {
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, .95fr);
+    align-items: start;
+  }
+  .gallery { grid-column: 1; grid-row: 1 / span 2; }
+  .tariffs { grid-column: 2; grid-row: 1; }
+  .buy     { grid-column: 2; grid-row: 2; }
+
+  .gallery:has(> .photo--empty) { height: 100%; }
+  .gallery:has(> .photo--empty) > .photo--empty { flex: 1; }
+
+  .gallery:has(.gallery__main) {
+    position: sticky;
+    top: calc(var(--head-h) + 1rem);
+    align-self: start;
+  }
+}
+
+.gallery { display: flex; flex-direction: column; gap: .5rem; }
+
+/* The large photo is a button, not a link: clicking opens the photo over the page
+   rather than taking you to the file in storage. */
+.gallery__main {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #16191a;
+  border: 1px solid var(--line);
+  cursor: zoom-in;
+}
+
+.gallery > .photo--empty {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+/* The stage around the large photo: a reference frame for the arrows. The wrapper
+   is built by gallery.js — if the script does not load, no dead arrows appear on
+   the page. */
+.gallery__stage { position: relative; }
+
+.gallery__arrow {
+  position: absolute;
+  top: 50%;
+  margin-top: -21px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--accent-ink);
+  background: var(--accent);
+  transition: background-color var(--fast);
+}
+.gallery__arrow:hover { background: color-mix(in srgb, var(--accent) 84%, #000); }
+.gallery__arrow--prev { left: .75rem; }
+.gallery__arrow--next { right: .75rem; }
+.gallery__arrow::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+.gallery__arrow--prev::before { transform: rotate(-135deg); margin-left: 3px; }
+.gallery__arrow--next::before { transform: rotate(45deg); margin-right: 3px; }
+
+.gallery__thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: .5rem;
+}
+.gallery__thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  aspect-ratio: 3 / 2;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  background: none;
+  cursor: pointer;
+  opacity: .75;
+  transition: opacity var(--fast), border-color var(--fast);
+}
+.gallery__thumb:hover { opacity: 1; }
+/* The photo currently shown is marked with a sign frame */
+.gallery__thumb.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+/* Full-screen view. The layer is built by gallery.js on first opening. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  place-items: center;
+  /* The row and the column are given an explicit height rather than "by content".
+     Without that there is nothing for the photo's max-height: 100% to measure
+     against: the row is measured by the photo itself, the reference becomes
+     circular, and the browser discards the constraint. A 1500×1000 photo hung
+     fifty points below the edge of the screen and pressed into the bottom.
+     minmax(0, 1fr) makes the viewing area definite — the photo fits into it and
+     centres. */
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(3.5rem, 6vw, 5rem) clamp(1rem, 5vw, 4rem);
+  background: rgba(8, 10, 6, .97);
+}
+.lightbox.is-open { display: grid; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox.is-open { animation: lightbox-in .18s var(--ease) both; }
+}
+@keyframes lightbox-in { from { opacity: 0; } }
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--accent-ink);
+  background: var(--accent);
+  transition: background-color var(--fast);
+}
+.lightbox__close:hover,
+.lightbox__nav:hover { background: color-mix(in srgb, var(--accent) 84%, #000); }
+
+.lightbox__close {
+  top: clamp(.75rem, 2vw, 1.5rem);
+  right: clamp(.75rem, 2vw, 1.5rem);
+}
+.lightbox__close::before,
+.lightbox__close::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+}
+.lightbox__close::before { transform: rotate(45deg); }
+.lightbox__close::after  { transform: rotate(-45deg); }
+
+.lightbox__nav {
+  top: 50%;
+  margin-top: -24px;
+}
+.lightbox__nav--prev { left: clamp(.5rem, 2vw, 1.5rem); }
+.lightbox__nav--next { right: clamp(.5rem, 2vw, 1.5rem); }
+.lightbox__nav::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+.lightbox__nav--prev::before { transform: rotate(-135deg); margin-left: 4px; }
+.lightbox__nav--next::before { transform: rotate(45deg); margin-right: 4px; }
+
+/* The tariff ladder as kilometre notches: the further along the scale, the
+   cheaper the day. This is the page's main commercial argument, so it gets its own
+   panel rather than a row among the specs. */
+.tariffs { padding: clamp(1.1rem, 2vw, 1.5rem); }
+
+.tariffs__title,
+.calc__title {
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  font-size: .9375rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.tariffs__title::before,
+.calc__title::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 8px;
+  background: var(--accent);
+}
+
+.tariffs__list {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+
+.tariffs__row {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .65rem .6rem .65rem 1.1rem;
+  margin-inline: -.6rem;
+  transition: background-color var(--fast);
+}
+/* The notch of a kilometre post */
+.tariffs__row::before {
+  content: "";
+  position: absolute;
+  left: .6rem;
+  top: 50%;
+  width: 3px;
+  height: 20px;
+  margin-top: -10px;
+  background: var(--line);
+  transform: scaleY(.5);
+  transition: background-color var(--fast), transform var(--fast);
+}
+.tariffs__row dt { font-variant-numeric: tabular-nums; }
+.tariffs__row .price__value {
+  font-size: 1.125rem;
+  color: var(--muted);
+  /* Only the colour changes. The size must not be touched: animating font size
+     makes the browser recompute the layout on every frame. */
+  transition: color var(--fast);
+}
+
+/* The step that the chosen term falls under. It is highlighted by the calculator
+   script: change the number of days and the highlight moves. */
+.tariffs__row.is-active { background: var(--accent-soft); }
+.tariffs__row.is-active::before {
+  background: var(--accent);
+  transform: scaleY(1);
+}
+/* The weight of the active step does NOT change. Bold is wider than regular — the
+   "3–7" label grew from 25.4 to 27.1px, the eye read that as "the type got
+   bigger", and the whole row repainted. The active step is marked well enough by
+   the fill, the notch and the colour: that is pure painting, with no layout
+   recomputation. */
+.tariffs__row.is-active dt { color: var(--fg); }
+.tariffs__row.is-active .price__value { color: var(--fg); }
+
+/* The calculator */
+.buy { display: flex; flex-direction: column; gap: .7rem; }
+
+.calc {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.calc__field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.calc__field > span { font-size: .875rem; color: var(--muted); }
+
+.calc__field input,
+.calc__field select {
+  width: 100%;
+  padding: .7rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  transition: border-color var(--fast), box-shadow var(--fast);
+}
+/* The corner is drawn as a background on the list ITSELF with two gradients and
+   anchored to its vertical middle. It used to be a pseudo-element on a field,
+   measured from the bottom: the height of the list does not depend on such an
+   anchor, and the corner drifted. */
+.calc__field select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.4rem;
+  cursor: pointer;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: right 1.2rem center, right .85rem center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+.calc__field input:hover,
+.calc__field select:hover { border-color: var(--fg); }
+.calc__field input:focus-visible,
+.calc__field select:focus-visible {
+  outline: none;
+  border-color: var(--mark);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mark) 25%, transparent);
+}
+
+.calc__list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--line-soft);
+  /* Room for all three lines of the bill — rent, discount, delivery. The discount
+     appears from the second day, delivery depends on the pickup place, and without
+     spare height the "Book" button jumped on every recomputation. Empty space at
+     the bottom of the list is calmer than a jump. */
+  min-height: 6.6em;
+}
+
+.calc__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.calc__row dd { font-variant-numeric: tabular-nums lining-nums; }
+/* The discount is the only figure set in sign green: it is a saving, and it has
+   to differ from the other lines of the bill. */
+.calc__row--discount dd { color: var(--good); font-weight: 700; }
+
+.calc__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: .9rem;
+  border-top: 2px solid var(--fg);
+}
+.calc__total > .muted { font-weight: 700; color: var(--fg); }
+.calc__total-value {
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+
+.calc__deposit,
+.calc__note,
+.calc__legal { color: var(--muted); }
+.calc__note,
+.calc__legal { text-align: center; }
+
+/* The disclaimer is smaller than a note but not paler: this is legal text, and
+   its contrast must not be dimmed below the norm. */
+.calc__legal {
+  font-size: .8125rem;
+  line-height: 1.45;
+  max-width: 38ch;
+  margin-inline: auto;
+}
+
+.calc__book { --btn-pad: .95em 1.5em; }
+
+/* Specs and equipment */
+.panels { display: grid; gap: clamp(1.75rem, 3.5vw, 2.75rem); }
+@media (min-width: 860px) {
+  .panels:has(> section + section) { grid-template-columns: 1.35fr 1fr; }
+}
+.panels h2 { margin-bottom: 1.15rem; }
+
+/* A spec-sheet row with leader dots: the dots run from the name to the value so
+   the eye does not lose the line. The pseudo-element inside dt is what stretches,
+   which is why dt is a flex container here too. */
+.specs__row {
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+  padding-block: .5rem;
+}
+.specs__row dt {
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.specs__row dt::after {
+  content: "";
+  flex: 1;
+}
+.specs__row dd {
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Equipment: a sign tick instead of a bullet */
+.features { display: grid; gap: .6rem; }
+.features li {
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+  color: var(--muted);
+}
+.features li::before {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--good);
+  border-bottom: 2px solid var(--good);
+  transform: rotate(-45deg) translate(1px, -2px);
+}
+
+.block__title { margin-bottom: 1.1rem; }
+
+/* The terms block is a panel, not a stack of rules. One edge of a panel instead
+   of ten hairlines inside it: the "Terms" page turns from solid hatching into a
+   set of cards. */
+.block {
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* The call to action at the end of the page — a dark plate. In the light theme it
+   is what holds the weight: one such plate works better than ten thin frames. */
+.cta-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  border: 0;
+  border-radius: var(--radius);
+  color: var(--inverse-fg);
+  background: var(--inverse-bg);
+  box-shadow: var(--shadow-2);
+}
+.cta-box .muted { color: color-mix(in srgb, var(--inverse-fg) 68%, transparent); }
+.cta-box h2 { max-width: 20ch; }
+.cta-box p { max-width: 52ch; }
+
+@media (min-width: 860px) {
+  .cta-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+  .cta-box h2 { flex: none; }
+  .cta-box p { flex: 1; }
+  .cta-box .btn { flex: none; }
+}
+
+
+/* 13. TERMS, DEALS, ABOUT -------------------------------------------------- */
+
+.deals {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.deal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  transition: transform var(--slow), border-color var(--fast),
+              box-shadow var(--slow);
+}
+.deal:hover {
+  transform: translateY(-4px);
+  border-color: var(--fg);
+  box-shadow: var(--shadow-2);
+}
+
+/* The size of the discount — a yellow sign plate. It is the key word in the
+   block, read in a fraction of a second and from a distance. */
+.deal__badge {
+  /* The horizontal padding is deliberately asymmetric: the right one is larger than
+     the left by the amount of the tracking. A negative letter-spacing shaves off
+     the space after EVERY character, the last one included, and without this
+     addition the text always sits right of the plate's centre. */
+  padding: .105em .48em .155em .45em;
+  border-radius: 10px;
+  margin-bottom: .3rem;
+  color: var(--accent-ink);
+  background: var(--accent);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.deal h2 { font-size: 1.1875rem; }
+.deal p:not(.deal__badge) { max-width: 46ch; }
+
+/* 640px — from this width more than one card fits in a row and the line limit
+   starts doing its job. Below that there is one card across the full width of the
+   screen, and the same limit broke the heading in the middle of empty space. */
+@media (min-width: 640px) {
+  .deal h2 { max-width: 16ch; }
+}
+
+/* "About": the figures */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.stat { display: flex; flex-direction: column; gap: .3rem; }
+
+.stat__num {
+  font-size: clamp(2.75rem, 1.5rem + 5vw, 5rem);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.stat dd { color: var(--muted); font-size: .9375rem; }
+
+/* "Why us": a numbered list. The numbers are drawn by a CSS counter — they are
+   not in the markup and must not be. */
+.why { counter-reset: why; display: grid; gap: 0; }
+
+.why li {
+  counter-increment: why;
+  display: grid;
+  gap: .4rem 2rem;
+  padding-block: clamp(1rem, 2vw, 1.5rem);
+}
+
+.why li::before {
+  content: counter(why, decimal-leading-zero);
+  align-self: start;
+  /* The plate with the number is a grid item, and without this line it stretched
+     across the whole column: on a narrow screen there is one column, the full
+     width of the screen, and the yellow plate ran from edge to edge. */
+  justify-self: start;
+  padding: .1em .4em;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .8125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.why p { color: var(--muted); }
+
+@media (min-width: 860px) {
+  .why li {
+    grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+  .why li::before { grid-row: 1; }
+
+  /* The line limit applies only on a wide screen, where the text lies in its own
+     column and without it would stretch across half the page. On a narrow screen
+     there is one column equal to the width of the screen: there this same limit in
+     characters came out narrower than the screen and broke the line before the
+     edge. */
+  .why h3 { max-width: 30ch; }
+  .why p { max-width: 62ch; }
+}
+
+
+/* 14. THE 404 PAGE --------------------------------------------------------- */
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  min-height: min(62svh, 620px);
+  justify-content: center;
+}
+.notfound h1 { max-width: 16ch; }
+.notfound .btn { margin-top: .75rem; }
+
+
+/* Text on a plate: we centre by CAP HEIGHT, not by the edges of the ink. That is
+   how lettering is set on real signs: capitals and figures sit exactly in the
+   middle of the panel while descenders of letters hang below — and that is right,
+   otherwise lines with and without descenders would jump relative to each other.
+
+   text-box trims the excess at the top down to cap height and at the bottom down
+   to the baseline, after which symmetric padding gives an exact middle with no
+   eyeballing. Where the device is unsupported, the asymmetric padding above does
+   the work — it was chosen by measurement and gives the same middle to the
+   pixel. */
+@supports (text-box: trim-both cap alphabetic) {
+  .deal__badge {
+    text-box: trim-both cap alphabetic;
+    padding-block: .32em;
+  }
+  .band__title,
+  .block__title,
+  .list-title {
+    text-box: trim-both cap alphabetic;
+    padding-block: .37em;
+  }
+  .logo__accent {
+    text-box: trim-both cap alphabetic;
+    padding-block: .34em;
+  }
+}

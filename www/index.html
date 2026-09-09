@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Batumi Motors</title>
+
+  <!-- This page shows nothing. All it does is work out the browser's language
+       and send the visitor to the right version. There is no need to land here
+       from search — let Google show /ru/, /en/ or /ka/ directly. -->
+  <meta name="robots" content="noindex">
+
+  <script>
+    // Sits in <head> and runs before painting — so nothing flickers.
+    // location.replace, not href: the address does not enter history, and the
+    // Back button does not bring you right back here in a loop.
+    (function () {
+      var available = ["ru", "en", "ka"];
+      var preferred = navigator.languages || [navigator.language || "en"];
+      var target = "en";                       // everybody else gets English
+      for (var i = 0; i < preferred.length; i++) {
+        var code = String(preferred[i]).slice(0, 2).toLowerCase();
+        if (available.indexOf(code) !== -1) { target = code; break; }
+      }
+      location.replace("/" + target + "/");
+    })();
+  </script>
+
+  <!-- If JavaScript is off — send them to English without it. -->
+  <noscript><meta http-equiv="refresh" content="0; url=/en/"></noscript>
+</head>
+
+<body>
+  <noscript>
+    <p><a href="/ru/">Русский</a> · <a href="/en/">English</a> · <a href="/ka/">ქართული</a></p>
+  </noscript>
+</body>
+</html>

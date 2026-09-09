@@ -1,0 +1,73 @@
+<!-- car-pages: generated automatically, do not edit by hand -->
+<!doctype html>
+<html lang="ru" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{car-title}</title>
+  <meta name="description" content="{car-meta}">
+
+  <!--#head-->
+  <!--#-->
+</head>
+
+<body>
+
+  <!-- HEADER =============================================================== -->
+  <!--#header cars-->
+  <!--#-->
+
+  <main>
+
+    <!-- One section for the whole page — as on Terms, About and Deals -->
+    <section class="section shell">
+
+      <!-- The current page is not in the crumbs: its name is one line below, in h1 -->
+      <nav class="crumbs" aria-label="{crumbs-label}">
+        <a href="{url-cars}">{nav-cars}</a>
+      </nav>
+
+      <header class="page-head">
+        <h1>{car-name}<span class="car-year">{car-year}</span></h1>
+        <ul class="chips">
+{chips}
+        </ul>
+      </header>
+
+      <div class="car-top">
+{gallery}
+
+{buy}
+      </div>
+
+      <!-- .blocks — the same wrapper as on Terms: it gives air between the blocks -->
+      <div class="blocks">
+
+{description}
+
+{panels}
+
+{car-terms}
+
+      </div>
+
+      <aside class="cta-box frame">
+        <h2>{cta-box-title}</h2>
+        <p class="muted">{cta-box-text}</p>
+        <a class="btn" href="{booking-url}" rel="noopener">{cta}</a>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- FOOTER =============================================================== -->
+  <!--#footer-->
+  <!--#-->
+
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/calc.js" defer></script>
+  <script src="/assets/js/gallery.js" defer></script>
+
+</body>
+</html>

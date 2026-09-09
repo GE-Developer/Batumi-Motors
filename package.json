@@ -1,0 +1,15 @@
+{
+  "name": "batumi-motors",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/server.ts",
+    "update": "node scripts/update.ts",
+    "cars": "node scripts/cars.ts",
+    "deals": "node scripts/deals.ts",
+    "car-pages": "node scripts/car-pages.ts",
+    "build": "node scripts/update.ts && node scripts/cars.ts && node scripts/deals.ts && node scripts/car-pages.ts && node scripts/sitemap.ts",
+    "sitemap": "node scripts/sitemap.ts",
+    "deploy": "npm run build && npx wrangler@latest pages deploy www --project-name=batumi-motors"
+  }
+}

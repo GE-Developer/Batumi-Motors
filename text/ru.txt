@@ -1,0 +1,234 @@
+# ═══════════════════════════════════════════════════════════════
+#  RUSSIAN TEXT  →  addresses batumimotors.com/…
+#
+#  The keys here must match text/en.txt and text/ka.txt.
+#  If a key is missing in some language, update.ts stops and says so.
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Menu ────────────────────────────────────────────────────
+nav-cars  = Автопарк
+nav-deals = Акции
+nav-terms = Условия
+nav-about = О нас
+
+# ─── Buttons ─────────────────────────────────────────────────
+cta = Забронировать
+
+# ─── Footer ──────────────────────────────────────────────────
+tagline         = Аренда автомобилей в Батуми, Грузия
+hours           = Работаем круглосуточно
+copyright       = © 2026 Batumi Motors. Батуми, Грузия
+made-by         = Made by
+footer-contacts = Контакты
+
+# ─── Language switcher ───────────────────────────────────────
+# lang-label — a caption for blind users, not visible on screen
+lang-label = Язык сайта
+
+# nav-label / theme-label — captions for blind users, not visible on screen
+nav-label   = Основное меню
+theme-label = Сменить тему
+
+# ═══════════════════════════════════════════════════════════════
+#  FLEET DICTIONARY
+#
+#  In the database everything repeatable is stored as a code: economy, hybrid,
+#  blind-spot. The translation is here, once per language. Add a car
+#  and there is nothing to translate, the codes are already translated.
+#
+#  The hash # in a template is where the script puts the number.
+#  In Georgian "from" goes at the end of the word, so the template is whole
+#  rather than "from" + number.
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Class ───────────────────────────────────────────────────
+class-economy   = Эконом
+class-comfort   = Комфорт
+class-crossover = Кроссовер
+class-suv       = Внедорожник
+class-premium   = Премиум
+
+# ─── Body ────────────────────────────────────────────────────
+body-sedan     = Седан
+body-liftback  = Лифтбек
+body-hatchback = Хэтчбек
+body-wagon     = Универсал
+body-crossover = Кроссовер
+body-suv       = Внедорожник
+body-minivan   = Минивэн
+
+# ─── Transmission ────────────────────────────────────────────
+trans-automatic = Автомат
+trans-manual    = Механика
+trans-cvt       = Вариатор
+
+# ─── Fuel ────────────────────────────────────────────────────
+fuel-petrol   = Бензин
+fuel-diesel   = Дизель
+fuel-hybrid   = Гибрид
+fuel-electric = Электро
+
+# ─── Fuel grade ──────────────────────────────────────────────
+grade-ai-92  = АИ-92
+grade-ai-95  = АИ-95
+grade-ai-98  = АИ-98
+grade-diesel = Дизель
+
+# ─── Drive and steering ──────────────────────────────────────
+drive-fwd = Передний привод
+drive-rwd = Задний привод
+drive-awd = Полный привод
+drive-4wd = Полный привод 4x4
+steering-left  = Левый руль
+steering-right = Правый руль
+
+# ─── Equipment ───────────────────────────────────────────────
+feature-sunroof         = Люк
+feature-heated-seats    = Подогрев сидений
+feature-heated-wheel    = Подогрев руля
+feature-leather         = Кожаный салон
+feature-alcantara       = Алькантара
+feature-climate-dual    = Двухзонный климат
+feature-blind-spot      = Датчики слепых зон
+feature-camera-rear     = Камера заднего вида
+feature-camera-360      = Круговой обзор
+feature-cruise          = Круиз-контроль
+feature-cruise-adaptive = Адаптивный круиз-контроль
+feature-carplay         = Apple CarPlay
+feature-bluetooth       = Bluetooth
+feature-ac              = Кондиционер
+feature-parking-sensors = Парктроник
+feature-roof-rails      = Рейлинги на крыше
+feature-isofix          = Крепления Isofix
+feature-winter-tires    = Зимняя резина
+
+# ─── Price and terms ─────────────────────────────────────────
+tariffs-title     = Цена за сутки
+price-from        = от # в сутки
+deposit-none      = Без залога
+mileage-unlimited = Без ограничения пробега
+
+# ─── Words with numbers ──────────────────────────────────────────
+# Russian needs three forms, one each for 1, 2 and 5 — see plural() in lib/site.ts.
+seats-one = место
+seats-few = места
+seats-many = мест
+
+# ─── Photos ──────────────────────────────────────────────────────
+# In photo-alt the script replaces the hash with "Toyota Prius 2015"
+photo-alt  = # напрокат в Батуми
+photo-soon = Фото скоро будет
+
+# The text WhatsApp opens with. The hash is replaced by the make and year.
+wa-text = Здравствуйте! Интересует #
+
+# ═══════════════════════════════════════════════════════════════
+#  CAR PAGE DICTIONARY — the key set must match ru.txt
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Tab title and description for Google ─────────────────────
+# The hash is the same make+model+year as in photo-alt/wa-text above.
+car-title = # напрокат в Батуми | Batumi Motors
+car-meta  = Аренда автомобиля # в Батуми. Цена за сутки, доставка по городу и в аэропорт, бронирование через WhatsApp.
+
+# ─── Crumbs and section headings ───────────────────────────────
+crumbs-label       = Хлебные крошки
+description-title  = Описание
+specs-title        = Характеристики
+features-title     = Оснащение
+car-terms-title    = Условия для этой машины
+
+# ─── Spec labels ───────────────────────────────────────────────
+spec-class        = Класс
+spec-body         = Кузов
+spec-transmission = Коробка передач
+spec-drive        = Привод
+spec-steering     = Руль
+spec-seats        = Мест
+spec-doors        = Дверей
+spec-fuel         = Тип топлива
+spec-fuel-grade   = Марка топлива
+spec-engine       = Объём двигателя
+spec-power        = Мощность
+spec-torque       = Крутящий момент
+spec-acceleration = Разгон до 100 км/ч
+spec-consumption  = Расход топлива
+spec-tank         = Топливный бак
+spec-trunk        = Багажник
+spec-clearance    = Клиренс
+spec-weight       = Масса
+
+# ─── Units (the hash is the number itself) ─────────────────────
+unit-l            = # л
+unit-power        = # л.с.
+unit-torque       = # Н·м
+unit-acceleration = # с
+unit-consumption  = # л/100 км
+unit-clearance    = # мм
+unit-weight       = # кг
+
+# ─── Doors: number + word ──────────────────────────────────────
+
+# ─── Terms for this car ────────────────────────────────────────
+deposit-title          = Залог
+terms-min-age          = Минимальный возраст
+terms-experience       = Стаж вождения
+terms-mileage          = Пробег
+terms-insurance        = Страховка
+terms-delivery-city    = Доставка по городу
+terms-delivery-airport = Доставка в аэропорт
+terms-cross-border     = Пересечение границы
+terms-note             = Условия указаны для этого автомобиля — у других машин парка они могут отличаться.
+
+# 0 in delivery_city_usd/delivery_airport_usd means free delivery, not "no
+# data": null means "there is no row at all", 0 means exactly this label.
+delivery-free = Бесплатно
+
+# Age and experience need three forms too: after the preposition Russian takes one
+# noun form for numbers ending in 1 (11 excepted) and another for all the rest.
+age-from-one  = От # года
+age-from-few  = От # лет
+age-from-many = От # лет
+
+experience-from-one  = От # года
+experience-from-few  = От # лет
+experience-from-many = От # лет
+
+mileage-per-day   = # км в сутки
+mileage-free-from = Без ограничений от # суток
+
+insurance-kasko = КАСКО
+
+cross-border-allowed   = Разрешено
+cross-border-forbidden = Запрещено
+
+# ─── End of the page ───────────────────────────────────────────
+cta-box-title = Готовы забронировать?
+cta-box-text  = Ответим в WhatsApp или по телефону в любое время суток.
+
+# ═══════════════════════════════════════════════════════════════
+#  THE CALCULATOR ON A CAR PAGE
+#  The hash # is the place for the number the script substitutes.
+# ═══════════════════════════════════════════════════════════════
+calc-title    = Расчёт стоимости
+calc-days     = Срок аренды, суток
+calc-pickup     = Выдача
+calc-return     = Возврат
+calc-rent     = Аренда
+calc-discount = Скидка
+calc-delivery = Доставка
+calc-total    = Итого
+calc-free     = Бесплатно
+calc-deposit  = Залог # — возвращается при сдаче машины
+calc-note     = Цену подачи в другие регионы назовёт менеджер.
+close       = Закрыть
+photo-prev  = Предыдущее фото
+photo-next  = Следующее фото
+calc-legal    = Расчёт предварительный и не является публичной офертой. Итоговую стоимость подтверждает менеджер при бронировании.
+place-city    = По Батуми
+place-airport = Аэропорт Батуми
+place-kutaisi = Кутаиси
+place-tbilisi = Тбилиси
+place-other   = Другой регион — по договорённости
+place-none  = Без доставки
+wa-days       = Срок аренды: # дн.

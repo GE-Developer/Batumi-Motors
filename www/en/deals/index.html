@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Offers and discounts | Batumi Motors</title>
+  <meta name="description" content="Seasonal and regular car rental offers in Batumi. Discounts do not stack — tell your manager when you book the car.">
+
+  <!--#head-->
+  <!-- The font is loaded ahead of time. Which files depends on the page's
+       language: Cyrillic only on the Russian pages, Georgian only on Georgian. -->
+  <link rel="preload" href="/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- The car photos live in Supabase storage, on somebody else's domain.
+       Opening the connection in advance takes the TLS handshake off the first
+       photo — and that is the first thing a person sees in the fleet. -->
+  <link rel="preconnect" href="https://adfdzsbzjachpckyhlwz.supabase.co">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <link rel="canonical" href="https://batumimotors.com/en/deals/">
+  <link rel="alternate" hreflang="ru" href="https://batumimotors.com/ru/deals/">
+  <link rel="alternate" hreflang="en" href="https://batumimotors.com/en/deals/">
+  <link rel="alternate" hreflang="ka" href="https://batumimotors.com/ka/deals/">
+  <link rel="alternate" hreflang="x-default" href="https://batumimotors.com/en/deals/">
+
+  <!-- How the page looks when the link is dropped into WhatsApp or Telegram.
+       The title and description are taken from the page itself, so every car
+       gets its own preview rather than one shared across the site. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Batumi Motors">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:url" content="https://batumimotors.com/en/deals/">
+  <meta property="og:title" content="Offers and discounts | Batumi Motors">
+  <meta property="og:description" content="Seasonal and regular car rental offers in Batumi. Discounts do not stack — tell your manager when you book the car.">
+  <meta name="twitter:card" content="summary">
+
+  <script>
+    // The theme is applied BEFORE painting, otherwise a dark page flashes white.
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (e) {}
+
+    // The animation freeze is lifted two frames after the first paint — the
+    // explanation is in style.css, the "Reset" section.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove("preload");
+      });
+    });
+  </script>
+  <!--#-->
+</head>
+
+<body>
+
+  <!-- HEADER =============================================================== -->
+  <!--#header deals-->
+  <header class="head">
+    <div class="shell head__row">
+
+      <a class="logo" href="/en/">
+        <span>Batumi</span><span class="logo__accent">Motors</span>
+      </a>
+
+      <!-- The burger is visible only on a narrow screen. On a wide one CSS
+           hides it, and the panel below unfolds back into the header row. -->
+      <button class="burger" type="button" aria-label="Main menu"
+              aria-expanded="false" aria-controls="head-menu">
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+      </button>
+
+      <!-- On a wide screen the .head__menu and .head__tools wrappers get
+           display: contents and vanish from the layout: sections, languages and
+           theme stand straight in the header grid, as if the wrappers were not
+           there. On a narrow screen this is a drop-down panel under the burger. -->
+      <div class="head__menu" id="head-menu">
+
+        <!-- The cross is visible only in the opened drawer: on a wide screen
+             the wrapper dissolves and the button has no business there. -->
+        <button class="drawer-close" type="button" aria-label="Close"></button>
+
+        <nav class="nav" aria-label="Main menu">
+          <a class="nav__link" href="/en/cars/">Fleet</a>
+          <a class="nav__link is-active" href="/en/deals/">Offers</a>
+          <a class="nav__link" href="/en/terms/">Terms</a>
+          <a class="nav__link" href="/en/about/">About</a>
+        </nav>
+
+        <div class="head__tools">
+          <nav class="lang" aria-label="Site language">
+            <a class="lang__link" href="/ru/deals/" hreflang="ru" lang="ru">RU</a>
+            <a class="lang__link is-active" href="/en/deals/" aria-current="true" hreflang="en" lang="en">EN</a>
+            <a class="lang__link" href="/ka/deals/" hreflang="ka" lang="ka">KA</a>
+          </nav>
+
+          <button class="theme" type="button" aria-label="Switch theme">
+            <svg class="theme__sun" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="3.4"></circle>
+              <path d="M8 .9v1.9M8 13.2v1.9M.9 8h1.9M13.2 8h1.9M3.1 3.1l1.35 1.35M11.55 11.55L12.9 12.9M12.9 3.1l-1.35 1.35M4.45 11.55L3.1 12.9"></path>
+            </svg>
+            <svg class="theme__moon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="5"></circle>
+              <path d="M8 3a5 5 0 000 10z" fill="currentColor" stroke="none"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <a class="btn head__cta" href="https://wa.me/995599114024" rel="noopener">Book now</a>
+
+    </div>
+  </header>
+  <!--#-->
+
+  <main>
+
+    <section class="section shell">
+
+      <header class="page-head">
+        <h1>Offers</h1>
+        <p class="lead">Seasonal and regular offers.</p>
+      </header>
+
+      <ul class="deals">
+        <!--@event-deals-->
+        <li class="deal frame">
+          <p class="deal__badge">−10%</p>
+          <h2>Birthday discount</h2>
+          <p class="muted">The discount applies to the entire rental.<br>
+          Valid on the day before your birthday, on the day itself and the day after.</p>
+        </li>
+        <li class="deal frame">
+          <p class="deal__badge">−8%</p>
+          <h2>For a team</h2>
+          <p class="muted">The discount applies when you rent two or more cars at the same time.</p>
+        </li>
+        <li class="deal frame">
+          <p class="deal__badge">$20</p>
+          <h2>Designated driver</h2>
+          <p class="muted">Our driver comes to you and takes you home in your rental car.<br>
+          Within Batumi.</p>
+        </li>
+        <li class="deal frame">
+          <p class="deal__badge">$90</p>
+          <h2>Private driver</h2>
+          <p class="muted">From 10:00 to 22:00.<br>
+          The trip in your car starts and ends in Batumi.</p>
+        </li>
+        <!--@-->
+      </ul>
+
+      <p class="small muted list-note">Discounts do not stack.<br>To use an offer, tell your manager when you book the car.</p>
+
+      <p class="list-cta">
+        <a class="btn" href="/en/cars/">The full fleet</a>
+      </p>
+
+    </section>
+  </main>
+
+  <!-- FOOTER =============================================================== -->
+  <!--#footer-->
+  <footer class="foot">
+    <div class="shell foot__grid">
+
+      <div>
+        <a class="logo" href="/en/">
+          <span>Batumi</span><span class="logo__accent">Motors</span>
+        </a>
+        <p class="small muted foot__tag">Car rental in Batumi, Georgia</p>
+        <p class="small muted foot__hours">Open 24/7</p>
+      </div>
+
+      <div>
+        <h2 class="foot__title">Contact</h2>
+        <ul class="foot__list">
+          <li><a class="foot__link" href="tel:+995599114024">+995 599 114 024</a></li>
+          <li><a class="foot__link" href="https://wa.me/995599114024" rel="noopener">WhatsApp</a></li>
+          <li><a class="foot__link" href="https://instagram.com/batumimotors" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="shell foot__bottom">
+      <p class="small muted">© 2026 Batumi Motors. Batumi, Georgia</p>
+      <p class="small muted foot__made">Made by
+        <a class="foot__link" href="https://ge-developer.tilda.ws" rel="noopener">GE-Developer</a></p>
+    </div>
+  </footer>
+  <!--#-->
+
+  <script src="/assets/js/theme.js" defer></script>
+
+</body>
+</html>

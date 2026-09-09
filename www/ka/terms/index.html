@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ka" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ქირაობის პირობები: დეპოზიტი, გარბენი | Batumi Motors</title>
+  <meta name="description" content="Batumi Motors-ის ქირაობის პირობები: 21 წლიდან, $100 დეპოზიტი, 300 კმ დღეში და შეუზღუდავი 3 დღიდან, საწვავი 95-ე და ზემოთ, ნაღდი ანგარიშსწორება.">
+
+  <!--#head-->
+  <!-- The font is loaded ahead of time. Which files depends on the page's
+       language: Cyrillic only on the Russian pages, Georgian only on Georgian. -->
+  <link rel="preload" href="/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-georgian.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- The car photos live in Supabase storage, on somebody else's domain.
+       Opening the connection in advance takes the TLS handshake off the first
+       photo — and that is the first thing a person sees in the fleet. -->
+  <link rel="preconnect" href="https://adfdzsbzjachpckyhlwz.supabase.co">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <link rel="canonical" href="https://batumimotors.com/ka/terms/">
+  <link rel="alternate" hreflang="ru" href="https://batumimotors.com/ru/terms/">
+  <link rel="alternate" hreflang="en" href="https://batumimotors.com/en/terms/">
+  <link rel="alternate" hreflang="ka" href="https://batumimotors.com/ka/terms/">
+  <link rel="alternate" hreflang="x-default" href="https://batumimotors.com/en/terms/">
+
+  <!-- How the page looks when the link is dropped into WhatsApp or Telegram.
+       The title and description are taken from the page itself, so every car
+       gets its own preview rather than one shared across the site. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Batumi Motors">
+  <meta property="og:locale" content="ka_GE">
+  <meta property="og:url" content="https://batumimotors.com/ka/terms/">
+  <meta property="og:title" content="ქირაობის პირობები: დეპოზიტი, გარბენი | Batumi Motors">
+  <meta property="og:description" content="Batumi Motors-ის ქირაობის პირობები: 21 წლიდან, $100 დეპოზიტი, 300 კმ დღეში და შეუზღუდავი 3 დღიდან, საწვავი 95-ე და ზემოთ, ნაღდი ანგარიშსწორება.">
+  <meta name="twitter:card" content="summary">
+
+  <script>
+    // The theme is applied BEFORE painting, otherwise a dark page flashes white.
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (e) {}
+
+    // The animation freeze is lifted two frames after the first paint — the
+    // explanation is in style.css, the "Reset" section.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove("preload");
+      });
+    });
+  </script>
+  <!--#-->
+</head>
+
+<body>
+
+  <!-- ქუდი ================================================================= -->
+  <!--#header terms-->
+  <header class="head">
+    <div class="shell head__row">
+
+      <a class="logo" href="/ka/">
+        <span>Batumi</span><span class="logo__accent">Motors</span>
+      </a>
+
+      <!-- The burger is visible only on a narrow screen. On a wide one CSS
+           hides it, and the panel below unfolds back into the header row. -->
+      <button class="burger" type="button" aria-label="მთავარი მენიუ"
+              aria-expanded="false" aria-controls="head-menu">
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+      </button>
+
+      <!-- On a wide screen the .head__menu and .head__tools wrappers get
+           display: contents and vanish from the layout: sections, languages and
+           theme stand straight in the header grid, as if the wrappers were not
+           there. On a narrow screen this is a drop-down panel under the burger. -->
+      <div class="head__menu" id="head-menu">
+
+        <!-- The cross is visible only in the opened drawer: on a wide screen
+             the wrapper dissolves and the button has no business there. -->
+        <button class="drawer-close" type="button" aria-label="დახურვა"></button>
+
+        <nav class="nav" aria-label="მთავარი მენიუ">
+          <a class="nav__link" href="/ka/cars/">ავტოპარკი</a>
+          <a class="nav__link" href="/ka/deals/">აქციები</a>
+          <a class="nav__link is-active" href="/ka/terms/">პირობები</a>
+          <a class="nav__link" href="/ka/about/">ჩვენ შესახებ</a>
+        </nav>
+
+        <div class="head__tools">
+          <nav class="lang" aria-label="საიტის ენა">
+            <a class="lang__link" href="/ru/terms/" hreflang="ru" lang="ru">RU</a>
+            <a class="lang__link" href="/en/terms/" hreflang="en" lang="en">EN</a>
+            <a class="lang__link is-active" href="/ka/terms/" aria-current="true" hreflang="ka" lang="ka">KA</a>
+          </nav>
+
+          <button class="theme" type="button" aria-label="თემის შეცვლა">
+            <svg class="theme__sun" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="3.4"></circle>
+              <path d="M8 .9v1.9M8 13.2v1.9M.9 8h1.9M13.2 8h1.9M3.1 3.1l1.35 1.35M11.55 11.55L12.9 12.9M12.9 3.1l-1.35 1.35M4.45 11.55L3.1 12.9"></path>
+            </svg>
+            <svg class="theme__moon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="5"></circle>
+              <path d="M8 3a5 5 0 000 10z" fill="currentColor" stroke="none"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <a class="btn head__cta" href="https://wa.me/995599114024" rel="noopener">დაჯავშნა</a>
+
+    </div>
+  </header>
+  <!--#-->
+
+  <main>
+
+    <section class="section shell">
+
+      <header class="page-head">
+        <h1>ქირაობის პირობები</h1>
+        <p class="lead">ყველაფერი, რაც ხელშეკრულებაშია: დეპოზიტი, გარბენი, საწვავი, საზღვრები, ჯარიმები და როგორ მოვიქცეთ ავარიისას.</p>
+      </header>
+
+      <div class="blocks">
+        <section class="block">
+          <h2 class="block__title">მოთხოვნები მძღოლისადმი</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>მინიმალური ასაკი</dt>
+              <dd class="muted">21 წლიდან.<br>
+              ცალკეულ ავტომობილებზე — 26 წლიდან</dd>
+            </div>
+            <div class="row">
+              <dt>მართვის სტაჟი</dt>
+              <dd class="muted">2 წლიდან</dd>
+            </div>
+            <div class="row">
+              <dt>მართვის მოწმობა</dt>
+              <dd class="muted">ეროვნული ან საერთაშორისო</dd>
+            </div>
+            <div class="row">
+              <dt>საბუთები</dt>
+              <dd class="muted">პასპორტი და მართვის მოწმობა</dd>
+            </div>
+            <div class="row">
+              <dt>ქირაობის ვადა</dt>
+              <dd class="muted">1 დღიდან</dd>
+            </div>
+            <div class="row">
+              <dt>მეორე მძღოლი</dt>
+              <dd class="muted">უფასოდ</dd>
+            </div>
+            <div class="row">
+              <dt>მგზავრები</dt>
+              <dd class="muted">არაუმეტეს იმისა, რაც მწარმოებელს აქვს გათვალისწინებული</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">რა შედის ფასში</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>დაზღვევა</dt>
+              <dd class="muted">სრული დაზღვევა: ავარია, ქურდობა, ძარცვა, ვანდალიზმი, ხანძარი, აფეთქება, სტიქიური უბედურება.<br>
+              ცალკე დაზღვეულია პასუხისმგებლობა მესამე პირების წინაშე</dd>
+            </div>
+            <div class="row">
+              <dt>ტექნიკური მომსახურება</dt>
+              <dd class="muted">ყოველი ავტომობილი მოწმდება გაცემამდე: ზეთი, მუხრუჭები, საბურავები, სალონის სისუფთავე</dd>
+            </div>
+            <div class="row">
+              <dt>მხარდაჭერა</dt>
+              <dd class="muted">თუ გზაში რამე მოხდა, დაგვირეკეთ ნებისმიერ დროს და ადგილზე დაგეხმარებით</dd>
+            </div>
+            <div class="row">
+              <dt>პარკირება</dt>
+              <dd class="muted">ბათუმის ფასიანი პარკირება გადახდილია — ქალაქში თავისუფლად დააყენებთ მანქანას</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">გადახდა და დეპოზიტი</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>გადახდა</dt>
+              <dd class="muted">ნაღდი ანგარიშსწორებით ან გადარიცხვით.<br>
+              ნაღდი — ლარი, ევრო, დოლარი</dd>
+            </div>
+            <div class="row">
+              <dt>დეპოზიტი</dt>
+              <dd class="muted">$100.<br>
+              ბრუნდება ავტომობილის დაბრუნების მომენტში, თუ ხელშეკრულებით პრეტენზია არ არსებობს</dd>
+            </div>
+            <div class="row">
+              <dt>წინასწარი გადახდა</dt>
+              <dd class="muted">არ არის საჭირო.<br>
+              ჯავშანს ტელეფონით ვადასტურებთ</dd>
+            </div>
+            <div class="row">
+              <dt>ვადის გაგრძელება</dt>
+              <dd class="muted">წინასწარ შეგვატყობინეთ და ტარიფს ახალი ვადის მიხედვით გადავითვლით</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">მიწოდება და დაბრუნება</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>ბათუმის აეროპორტი</dt>
+              <dd class="muted">$9-დან ერთი მიმართულებით.<br>
+              თუ მიღებაც და ჩაბარებაც აეროპორტშია — $18-დან</dd>
+            </div>
+            <div class="row">
+              <dt>ბათუმში</dt>
+              <dd class="muted">$5-დან ერთი მიმართულებით.<br>
+              თუ მიღებაც და ჩაბარებაც ქალაქშია — $10-დან</dd>
+            </div>
+            <div class="row">
+              <dt>ქუთაისი</dt>
+              <dd class="muted">$100 ერთი მიმართულებით.<br>
+              იქით და უკან — $200</dd>
+            </div>
+            <div class="row">
+              <dt>თბილისი</dt>
+              <dd class="muted">$200 ერთი მიმართულებით.<br>
+              იქით და უკან — $400</dd>
+            </div>
+            <div class="row">
+              <dt>სხვა რეგიონები</dt>
+              <dd class="muted">განიხილება ცალკე</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">გარბენი და საწვავი</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>გარბენი</dt>
+              <dd class="muted">300 კმ დღეში.<br>
+              3 დღიდან შეზღუდვა არ არის</dd>
+            </div>
+            <div class="row">
+              <dt>ლიმიტის გადაჭარბება</dt>
+              <dd class="muted">$0.20 ლიმიტს ზემოთ ყოველ კილომეტრზე</dd>
+            </div>
+            <div class="row">
+              <dt>საწვავი</dt>
+              <dd class="muted">Premium ან Super — 95-ე და ზემოთ, არანაკლებ</dd>
+            </div>
+            <div class="row">
+              <dt>გასამართი სადგურები</dt>
+              <dd class="muted">GULF, WISSOIL, SOCAR, LUKOIL, ROMPETROL</dd>
+            </div>
+            <div class="row">
+              <dt>საწვავის დონე</dt>
+              <dd class="muted">დაბრუნებისას საწვავის დონე იგივე უნდა იყოს, რაც მიღებისას.<br>
+              ნაკლები — $15 ბაკის ყოველ მეოთხედზე</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">სად შეიძლება მგზავრობა</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>ტერიტორია</dt>
+              <dd class="muted">საქართველოს საერთო სარგებლობის გზები</dd>
+            </div>
+            <div class="row">
+              <dt>საქართველოს დატოვება</dt>
+              <dd class="muted">აკრძალულია, მათ შორის აფხაზეთი და სამხრეთ ოსეთი.<br>
+              დარღვევის შემთხვევაში ავტომობილზე სრული პასუხისმგებლობა ეკისრება მოქირავნეს, დაზღვევის მიუხედავად</dd>
+            </div>
+            <div class="row">
+              <dt>უგზოობა</dt>
+              <dd class="muted">აკრძალულია.<br>
+              აკრძალვის დარღვევისას მოქირავნე იხდის სავალი ნაწილის დიაგნოსტიკას და შეკეთებას, თუ დაზიანება აღმოჩნდა</dd>
+            </div>
+            <div class="row">
+              <dt>კომერციული გამოყენება</dt>
+              <dd class="muted">რბოლა, ტაქსი და ნებისმიერი კომერციული გამოყენება აკრძალულია</dd>
+            </div>
+            <div class="row">
+              <dt>მოწევა</dt>
+              <dd class="muted">სალონში აკრძალულია</dd>
+            </div>
+            <div class="row">
+              <dt>შეკეთება</dt>
+              <dd class="muted">ავტომობილის დაშლა და შეკეთება ჩვენი თანხმობის გარეშე არ შეიძლება.<br>
+              ბორბლის შეცვლა და საბურავის შეკეთება — შეიძლება</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">ჯარიმები და დაკავებები</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>გასაღების დაკარგვა</dt>
+              <dd class="muted">$200</dd>
+            </div>
+            <div class="row">
+              <dt>სარეგისტრაციო მოწმობის დაკარგვა</dt>
+              <dd class="muted">$100</dd>
+            </div>
+            <div class="row">
+              <dt>სალონში მოწევა</dt>
+              <dd class="muted">$50</dd>
+            </div>
+            <div class="row">
+              <dt>დაუბანელი ავტომობილის დაბრუნება</dt>
+              <dd class="muted">ავტომობილი გაიცემა სუფთად და დაბრუნებისას სუფთა უნდა იყოს.<br>
+              წინააღმდეგ შემთხვევაში დამატებით დაიკავება $10</dd>
+            </div>
+            <div class="row">
+              <dt>სალონის ქიმწმენდა</dt>
+              <dd class="muted">$50</dd>
+            </div>
+            <div class="row">
+              <dt>დაბრუნების დაგვიანება</dt>
+              <dd class="muted">3 საათამდე — $5 საათში.<br>
+              3 საათზე მეტი — $50 დღეში</dd>
+            </div>
+            <div class="row">
+              <dt>გარბენის გადაჭარბება</dt>
+              <dd class="muted">$0.20 კილომეტრზე</dd>
+            </div>
+            <div class="row">
+              <dt>საწვავის ნაკლებობა</dt>
+              <dd class="muted">$15 ბაკის ყოველ მეოთხედზე</dd>
+            </div>
+            <div class="row">
+              <dt>საგზაო ჯარიმები</dt>
+              <dd class="muted">იხდის მოქირავნე</dd>
+            </div>
+            <div class="row">
+              <dt>აღჭურვილობის დაზიანება</dt>
+              <dd class="muted">მაგნიტოლა, დინამიკები, ბორბლები, საწმენდები, სარკეები, ბავშვის სავარძელი, ტელეფონის სამაგრი, მინები — სრული პასუხისმგებლობა ეკისრება მოქირავნეს</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">ავარიის შემთხვევაში</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>არ გადაადგილოთ ავტომობილი</dt>
+              <dd class="muted">მზღვეველის პირობებით ავტომობილის დაძვრა პოლიციის მოსვლამდე არ შეიძლება</dd>
+            </div>
+            <div class="row">
+              <dt>ჯერ დაგვირეკეთ</dt>
+              <dd class="muted">ჯერ ჩვენ, შემდეგ, საჭიროების შემთხვევაში, სადაზღვევო კომპანიას.<br>
+              მათი მოთხოვნით გამოიძახეთ პოლიცია ნომერზე 112</dd>
+            </div>
+            <div class="row">
+              <dt>როდის არ იმუშავებს დაზღვევა</dt>
+              <dd class="muted">ამკრძალავ სიგნალზე გავლა, უწყვეტი ან ორმაგი უწყვეტი ხაზის გადაკვეთა, სიჩქარის მნიშვნელოვანი გადაჭარბება, მართვა შემთხრალ მდგომარეობაში, შემთხვევის ადგილის მიტოვება.<br>
+              ამ შემთხვევებში მზღვეველს შეუძლია უარი თქვას ანაზღაურებაზე და ზარალი სრულად ეკისრება მოქირავნეს</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="block">
+          <h2 class="block__title">გასვლამდე</h2>
+          <dl class="rows">
+            <div class="row">
+              <dt>გადაუღეთ ავტომობილს ფოტო</dt>
+              <dd class="muted">ქირაობის დაწყებამდე დააფიქსირეთ ფოტოზე ან ვიდეოზე ძარისა და სალონის ყველა დაზიანება.<br>
+              ეს დაგიცავთ დაბრუნებისას დავისგან</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <aside class="cta-box frame">
+        <h2>დარჩა კითხვები?</h2>
+        <p class="muted">გიპასუხებთ WhatsApp-ით ან ტელეფონით დღე-ღამის ნებისმიერ საათს.</p>
+        <a class="btn" href="https://wa.me/995599114024" rel="noopener">WhatsApp</a>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- ქვედა კოლონტიტული ==================================================== -->
+  <!--#footer-->
+  <footer class="foot">
+    <div class="shell foot__grid">
+
+      <div>
+        <a class="logo" href="/ka/">
+          <span>Batumi</span><span class="logo__accent">Motors</span>
+        </a>
+        <p class="small muted foot__tag">ავტომობილების ქირაობა ბათუმში, საქართველო</p>
+        <p class="small muted foot__hours">ვმუშაობთ 24/7</p>
+      </div>
+
+      <div>
+        <h2 class="foot__title">კონტაქტი</h2>
+        <ul class="foot__list">
+          <li><a class="foot__link" href="tel:+995599114024">+995 599 114 024</a></li>
+          <li><a class="foot__link" href="https://wa.me/995599114024" rel="noopener">WhatsApp</a></li>
+          <li><a class="foot__link" href="https://instagram.com/batumimotors" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="shell foot__bottom">
+      <p class="small muted">© 2026 Batumi Motors. ბათუმი, საქართველო</p>
+      <p class="small muted foot__made">Made by
+        <a class="foot__link" href="https://ge-developer.tilda.ws" rel="noopener">GE-Developer</a></p>
+    </div>
+  </footer>
+  <!--#-->
+
+  <script src="/assets/js/theme.js" defer></script>
+
+</body>
+</html>

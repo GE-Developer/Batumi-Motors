@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ka" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ავტომობილის ქირაობა ბათუმში | Batumi Motors</title>
+  <meta name="description" content="ავტომობილის ქირაობა ბათუმში: საკუთარი პარკი, სრული დაზღვევა ფასში, წინასწარი გადახდის გარეშე. გადახდა მიღებისას, ყველა დანამატი წინასწარ წერია პირობებში.">
+
+  <!--#head-->
+  <!-- The font is loaded ahead of time. Which files depends on the page's
+       language: Cyrillic only on the Russian pages, Georgian only on Georgian. -->
+  <link rel="preload" href="/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-georgian.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- The car photos live in Supabase storage, on somebody else's domain.
+       Opening the connection in advance takes the TLS handshake off the first
+       photo — and that is the first thing a person sees in the fleet. -->
+  <link rel="preconnect" href="https://adfdzsbzjachpckyhlwz.supabase.co">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <link rel="canonical" href="https://batumimotors.com/ka/">
+  <link rel="alternate" hreflang="ru" href="https://batumimotors.com/ru/">
+  <link rel="alternate" hreflang="en" href="https://batumimotors.com/en/">
+  <link rel="alternate" hreflang="ka" href="https://batumimotors.com/ka/">
+  <link rel="alternate" hreflang="x-default" href="https://batumimotors.com/en/">
+
+  <!-- How the page looks when the link is dropped into WhatsApp or Telegram.
+       The title and description are taken from the page itself, so every car
+       gets its own preview rather than one shared across the site. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Batumi Motors">
+  <meta property="og:locale" content="ka_GE">
+  <meta property="og:url" content="https://batumimotors.com/ka/">
+  <meta property="og:title" content="ავტომობილის ქირაობა ბათუმში | Batumi Motors">
+  <meta property="og:description" content="ავტომობილის ქირაობა ბათუმში: საკუთარი პარკი, სრული დაზღვევა ფასში, წინასწარი გადახდის გარეშე. გადახდა მიღებისას, ყველა დანამატი წინასწარ წერია პირობებში.">
+  <meta name="twitter:card" content="summary">
+
+  <script>
+    // The theme is applied BEFORE painting, otherwise a dark page flashes white.
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (e) {}
+
+    // The animation freeze is lifted two frames after the first paint — the
+    // explanation is in style.css, the "Reset" section.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove("preload");
+      });
+    });
+  </script>
+  <!--#-->
+</head>
+
+<body>
+
+  <!-- ქუდი =============================================================== -->
+  <!--#header-->
+  <header class="head">
+    <div class="shell head__row">
+
+      <a class="logo" href="/ka/">
+        <span>Batumi</span><span class="logo__accent">Motors</span>
+      </a>
+
+      <!-- The burger is visible only on a narrow screen. On a wide one CSS
+           hides it, and the panel below unfolds back into the header row. -->
+      <button class="burger" type="button" aria-label="მთავარი მენიუ"
+              aria-expanded="false" aria-controls="head-menu">
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+        <span class="burger__bar"></span>
+      </button>
+
+      <!-- On a wide screen the .head__menu and .head__tools wrappers get
+           display: contents and vanish from the layout: sections, languages and
+           theme stand straight in the header grid, as if the wrappers were not
+           there. On a narrow screen this is a drop-down panel under the burger. -->
+      <div class="head__menu" id="head-menu">
+
+        <!-- The cross is visible only in the opened drawer: on a wide screen
+             the wrapper dissolves and the button has no business there. -->
+        <button class="drawer-close" type="button" aria-label="დახურვა"></button>
+
+        <nav class="nav" aria-label="მთავარი მენიუ">
+          <a class="nav__link" href="/ka/cars/">ავტოპარკი</a>
+          <a class="nav__link" href="/ka/deals/">აქციები</a>
+          <a class="nav__link" href="/ka/terms/">პირობები</a>
+          <a class="nav__link" href="/ka/about/">ჩვენ შესახებ</a>
+        </nav>
+
+        <div class="head__tools">
+          <nav class="lang" aria-label="საიტის ენა">
+            <a class="lang__link" href="/ru/" hreflang="ru" lang="ru">RU</a>
+            <a class="lang__link" href="/en/" hreflang="en" lang="en">EN</a>
+            <a class="lang__link is-active" href="/ka/" aria-current="true" hreflang="ka" lang="ka">KA</a>
+          </nav>
+
+          <button class="theme" type="button" aria-label="თემის შეცვლა">
+            <svg class="theme__sun" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="3.4"></circle>
+              <path d="M8 .9v1.9M8 13.2v1.9M.9 8h1.9M13.2 8h1.9M3.1 3.1l1.35 1.35M11.55 11.55L12.9 12.9M12.9 3.1l-1.35 1.35M4.45 11.55L3.1 12.9"></path>
+            </svg>
+            <svg class="theme__moon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="8" cy="8" r="5"></circle>
+              <path d="M8 3a5 5 0 000 10z" fill="currentColor" stroke="none"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <a class="btn head__cta" href="https://wa.me/995599114024" rel="noopener">დაჯავშნა</a>
+
+    </div>
+  </header>
+  <!--#-->
+
+  <main>
+
+    <!-- COVER — full screen, photograph as the background -->
+    <section class="hero">
+
+      <div class="hero__media">
+        <svg class="car-line" viewBox="-160 0 1360 560" fill="none" aria-hidden="true" focusable="false">
+          <path pathLength="1" d="M 92 430 L 92 374 C 92 338 108 314 148 300 L 236 270 C 300 202 392 162 500 158 L 716 158 C 812 162 886 198 938 252 L 1066 294 C 1110 308 1134 342 1136 380 L 1136 430"/>
+          <path pathLength="1" d="M 92 430 L 224 430 A 96 96 0 0 1 416 430 L 784 430 A 96 96 0 0 1 976 430 L 1136 430"/>
+          <circle pathLength="1" cx="320" cy="430" r="74"/>
+          <circle pathLength="1" cx="880" cy="430" r="74"/>
+          <path class="car-line__soft" pathLength="1" d="M 262 264 C 322 206 404 174 500 172 L 704 172 C 778 176 844 206 890 254 Z"/>
+          <path class="car-line__soft" pathLength="1" d="M 566 172 L 562 262 M 560 262 L 548 430"/>
+          <path class="car-line__soft" pathLength="1" d="M 606 306 L 664 306"/>
+          <circle class="car-line__soft" pathLength="1" cx="320" cy="430" r="30"/>
+          <circle class="car-line__soft" pathLength="1" cx="880" cy="430" r="30"/>
+          <path class="car-line__faint" pathLength="1" d="M 60 504 L 1160 504"/>
+          <path class="car-line__faint" pathLength="1" d="M -150 240 L -30 240"/>
+          <path class="car-line__faint" pathLength="1" d="M -120 296 L -30 296"/>
+          <path class="car-line__faint" pathLength="1" d="M -90 352 L -30 352"/>
+          <path class="car-line__trace" pathLength="1" d="M 92 430 L 92 374 C 92 338 108 314 148 300 L 236 270 C 300 202 392 162 500 158 L 716 158 C 812 162 886 198 938 252 L 1066 294 C 1110 308 1134 342 1136 380 L 1136 430"/>
+        </svg>
+      </div>
+
+      <div class="shell hero__inner">
+        <div class="hero__text">
+          <h1>ყველაზე მეგობრული ავტოპარკი ბათუმში</h1>
+          <ol class="steps">
+            <li class="step">
+              <span class="step__plate">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 13.5A2.5 2.5 0 0 1 17.5 16H9.6L5.5 19.4V16A2.5 2.5 0 0 1 4 13.5v-7A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5z"/>
+                </svg>
+              </span>
+              მოგვწერეთ
+            </li>
+            <li class="step">
+              <span class="step__plate">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="7.6" cy="12" r="3.3"/><path d="M10.9 12H20M17.2 12v3.1M14.2 12v2.2"/>
+                </svg>
+              </span>
+              აიღეთ გასაღები
+            </li>
+            <li class="step">
+              <span class="step__plate">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4v5.5M4.4 13.4l5.2-1.7M19.6 13.4l-5.2-1.7"/>
+                </svg>
+              </span>
+              გაემგზავრეთ
+            </li>
+          </ol>
+
+          <p class="lead hero__note">სად წახვიდეთ — გეტყვით.<br>
+          მთები, ჩანჩქერები და სერპანტინები ბათუმიდან ერთ საათშია.</p>
+
+          <div class="hero__actions">
+            <a class="btn" href="/ka/cars/">დაჯავშნა</a>
+            <a class="btn btn--ghost" href="/ka/terms/">პირობები</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- FLEET — the cards are placed by cars.ts from the database -->
+    <section class="section shell">
+
+      <header class="band">
+        <h2 class="band__title">ავტოპარკი</h2>
+        <p class="lead">ყველა ავტომობილი მომსახურებულია გაცემამდე.<br>ფასები მითითებულია დღეში.</p>
+      </header>
+
+      <!--@cars-->
+      <ul class="grid">
+        <li>
+          <article class="card">
+
+            <div class="card__media">
+              <img class="photo" src="https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Toyota%20Rav4%202017/1.jpg" alt="Toyota RAV4 2017 ქირავდება ბათუმში" srcset="https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Rav4%202017/1.jpg?width=400&amp;resize=contain&amp;quality=80 400w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Rav4%202017/1.jpg?width=600&amp;resize=contain&amp;quality=80 600w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Rav4%202017/1.jpg?width=800&amp;resize=contain&amp;quality=80 800w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Rav4%202017/1.jpg?width=1000&amp;resize=contain&amp;quality=80 1000w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Rav4%202017/1.jpg?width=1200&amp;resize=contain&amp;quality=80 1200w" sizes="(min-width: 1200px) 400px, (min-width: 1000px) 46vw, (min-width: 800px) 44vw, 95vw"
+                   width="545" height="366" loading="eager" fetchpriority="high" decoding="async">
+            </div>
+
+            <div class="card__body">
+              <h3 class="card__name">
+                <a href="/ka/cars/toyota-rav4-2017/">Toyota RAV4<span class="card__year">2017</span></a>
+              </h3>
+
+              <ul class="chips">
+                <li class="chip">კროსოვერი</li>
+                <li class="chip">ავტომატიკა</li>
+                <li class="chip">5 ადგილი</li>
+              </ul>
+
+              <div class="card__foot">
+                <p class="price"><span class="muted small">დღეში </span><span class="price__value price__value--gap-left">$42</span><span class="muted small">-დან</span></p>
+                <a class="btn btn--ghost card__more" href="https://wa.me/995599114024?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20Toyota%20RAV4%202017" rel="noopener">დაჯავშნა</a>
+              </div>
+            </div>
+
+          </article>
+        </li>
+        <li>
+          <article class="card">
+
+            <div class="card__media">
+              <img class="photo" src="https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg" alt="Toyota Prius 2016 ქირავდება ბათუმში" srcset="https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg?width=400&amp;resize=contain&amp;quality=80 400w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg?width=600&amp;resize=contain&amp;quality=80 600w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg?width=800&amp;resize=contain&amp;quality=80 800w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg?width=1000&amp;resize=contain&amp;quality=80 1000w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg?width=1200&amp;resize=contain&amp;quality=80 1200w" sizes="(min-width: 1200px) 400px, (min-width: 1000px) 46vw, (min-width: 800px) 44vw, 95vw"
+                   width="545" height="366" loading="lazy" decoding="async">
+            </div>
+
+            <div class="card__body">
+              <h3 class="card__name">
+                <a href="/ka/cars/toyota-prius-2016/">Toyota Prius<span class="card__year">2016</span></a>
+              </h3>
+
+              <ul class="chips">
+                <li class="chip">ეკონომი</li>
+                <li class="chip">ავტომატიკა</li>
+                <li class="chip">5 ადგილი</li>
+              </ul>
+
+              <div class="card__foot">
+                <p class="price"><span class="muted small">დღეში </span><span class="price__value price__value--gap-left">$37</span><span class="muted small">-დან</span></p>
+                <a class="btn btn--ghost card__more" href="https://wa.me/995599114024?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20Toyota%20Prius%202016" rel="noopener">დაჯავშნა</a>
+              </div>
+            </div>
+
+          </article>
+        </li>
+        <li>
+          <article class="card">
+
+            <div class="card__media">
+              <img class="photo" src="https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Jeep%20Wrangler%202015%20CZ-732-CZ/1.jpg" alt="Jeep Wrangler 2015 ქირავდება ბათუმში" srcset="https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Jeep%20Wrangler%202015%20CZ-732-CZ/1.jpg?width=400&amp;resize=contain&amp;quality=80 400w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Jeep%20Wrangler%202015%20CZ-732-CZ/1.jpg?width=600&amp;resize=contain&amp;quality=80 600w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Jeep%20Wrangler%202015%20CZ-732-CZ/1.jpg?width=800&amp;resize=contain&amp;quality=80 800w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Jeep%20Wrangler%202015%20CZ-732-CZ/1.jpg?width=1000&amp;resize=contain&amp;quality=80 1000w, https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/render/image/public/Cars/Jeep%20Wrangler%202015%20CZ-732-CZ/1.jpg?width=1200&amp;resize=contain&amp;quality=80 1200w" sizes="(min-width: 1200px) 400px, (min-width: 1000px) 46vw, (min-width: 800px) 44vw, 95vw"
+                   width="545" height="366" loading="lazy" decoding="async">
+            </div>
+
+            <div class="card__body">
+              <h3 class="card__name">
+                <a href="/ka/cars/jeep-wrangler-2015/">Jeep Wrangler<span class="card__year">2015</span></a>
+              </h3>
+
+              <ul class="chips">
+                <li class="chip">ჯიპი</li>
+                <li class="chip">ავტომატიკა</li>
+                <li class="chip">5 ადგილი</li>
+              </ul>
+
+              <div class="card__foot">
+                <p class="price"><span class="muted small">დღეში </span><span class="price__value price__value--gap-left">$65</span><span class="muted small">-დან</span></p>
+                <a class="btn btn--ghost card__more" href="https://wa.me/995599114024?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20Jeep%20Wrangler%202015" rel="noopener">დაჯავშნა</a>
+              </div>
+            </div>
+
+          </article>
+        </li>
+      </ul>
+      <!--@-->
+
+      <p class="list-cta">
+        <a class="btn btn--ghost" href="/ka/cars/">მთელი ავტოპარკი</a>
+      </p>
+
+    </section>
+
+    <!-- DEALS — the cards are placed by deals.ts from the database -->
+    <section class="section shell">
+
+      <header class="band">
+        <h2 class="band__title">აქციები</h2>
+        <p class="lead">სეზონური და რეგულარული აქციები.</p>
+      </header>
+
+      <ul class="deals">
+        <!--@event-deals-->
+        <li class="deal frame">
+          <p class="deal__badge">−10%</p>
+          <h2>დაბადების დღეზე</h2>
+          <p class="muted">ფასდაკლება ვრცელდება ქირაობის მთელ ვადაზე.<br>
+          მოქმედებს დაბადების დღის წინა დღეს, თავად დაბადების დღეს და მომდევნო დღეს.</p>
+        </li>
+        <li class="deal frame">
+          <p class="deal__badge">−8%</p>
+          <h2>გუნდისთვის</h2>
+          <p class="muted">ფასდაკლება მოქმედებს ორი ან მეტი ავტომობილის ერთდროულად ქირაობისას.</p>
+        </li>
+        <li class="deal frame">
+          <p class="deal__badge">$20</p>
+          <h2>ფხიზელი მძღოლი</h2>
+          <p class="muted">ჩვენი მძღოლი მოვა და წაგიყვანთ თქვენივე ნაქირავები ავტომობილით.<br>
+          ბათუმის ფარგლებში.</p>
+        </li>
+        <li class="deal frame">
+          <p class="deal__badge">$90</p>
+          <h2>პირადი მძღოლი</h2>
+          <p class="muted">10:00-დან 22:00-მდე.<br>
+          მოგზაურობა თქვენივე ავტომობილით იწყება და მთავრდება ბათუმში.</p>
+        </li>
+        <!--@-->
+      </ul>
+
+      <aside class="cta-box frame">
+        <h2>მზად ხართ დასაჯავშნად?</h2>
+        <p class="muted">გიპასუხებთ WhatsApp-ში ან ტელეფონით დღე-ღამის ნებისმიერ დროს.</p>
+        <a class="btn" href="https://wa.me/995599114024" rel="noopener">დაჯავშნა</a>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- ქვედა კოლონტიტული =============================================================== -->
+  <!--#footer-->
+  <footer class="foot">
+    <div class="shell foot__grid">
+
+      <div>
+        <a class="logo" href="/ka/">
+          <span>Batumi</span><span class="logo__accent">Motors</span>
+        </a>
+        <p class="small muted foot__tag">ავტომობილების ქირაობა ბათუმში, საქართველო</p>
+        <p class="small muted foot__hours">ვმუშაობთ 24/7</p>
+      </div>
+
+      <div>
+        <h2 class="foot__title">კონტაქტი</h2>
+        <ul class="foot__list">
+          <li><a class="foot__link" href="tel:+995599114024">+995 599 114 024</a></li>
+          <li><a class="foot__link" href="https://wa.me/995599114024" rel="noopener">WhatsApp</a></li>
+          <li><a class="foot__link" href="https://instagram.com/batumimotors" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="shell foot__bottom">
+      <p class="small muted">© 2026 Batumi Motors. ბათუმი, საქართველო</p>
+      <p class="small muted foot__made">Made by
+        <a class="foot__link" href="https://ge-developer.tilda.ws" rel="noopener">GE-Developer</a></p>
+    </div>
+  </footer>
+  <!--#-->
+
+  <script src="/assets/js/theme.js" defer></script>
+
+</body>
+</html>
