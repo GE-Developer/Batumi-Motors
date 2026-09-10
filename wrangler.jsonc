@@ -1,0 +1,35 @@
+{
+  // What Cloudflare needs to know to serve this site. There is no server code
+  // here at all: the whole site is the finished HTML in www/, and Cloudflare
+  // simply hands those files out. `npm run build` produces them before this
+  // file is ever read.
+  //
+  // Pages would have taken the same folder without any configuration, but
+  // Cloudflare now points new projects at Workers and puts all its future work
+  // there, so this is the path that will still be maintained in a year.
+
+  "name": "batumi-motors",
+
+  // Which version of the Workers runtime's behaviour to pin to. It is a date,
+  // not a version number: Cloudflare keeps old behaviour for anyone who asks for
+  // an old date, so an unchanged site cannot break under a platform update.
+  "compatibility_date": "2026-09-10",
+
+  "assets": {
+    // The folder that goes out to the world. Everything else in the repository —
+    // scripts, blocks, dictionaries — is build material and stays behind.
+    "directory": "./www",
+
+    // /ru/cars/ serves www/ru/cars/index.html, and /ru/cars (no slash) redirects
+    // to the version with it. That is how the addresses were designed: clean,
+    // no .html on the end, one canonical form per page.
+    "html_handling": "auto-trailing-slash",
+
+    // An unknown address returns the NEAREST 404.html — so /ru/whatever gets
+    // www/ru/404.html, in Russian, and /ka/whatever gets the Georgian one.
+    // The alternative, "single-page-application", would answer 200 OK with the
+    // home page for every wrong address, and search engines would index the
+    // rubbish as real pages.
+    "not_found_handling": "404-page"
+  }
+}

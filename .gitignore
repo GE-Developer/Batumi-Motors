@@ -1,3 +1,13 @@
+# Finder's own files. They appear by themselves and have nothing to do with the site.
 .DS_Store
+
+# The project has no dependencies, but if it ever gets any — they do not go into
+# the repository, the build installs them.
 node_modules/
+
+# Logs and temporary files
 *.log
+
+# Wrangler's scratch directory. Created whenever the Cloudflare CLI runs,
+# holds local state and caches — nothing the site is built from.
+.wrangler/
