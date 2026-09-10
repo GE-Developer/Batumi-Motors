@@ -15,6 +15,21 @@
   // an old date, so an unchanged site cannot break under a platform update.
   "compatibility_date": "2026-09-10",
 
+  // The site answers on batumimotors.com and nowhere else.
+  //
+  // Left alone, wrangler switches both of these on by itself and says so in the
+  // build log. That would put the same pages on two more addresses —
+  // batumi-motors.<account>.workers.dev and a preview address per deployment —
+  // and to a search engine that is three sites carrying identical content, with
+  // the weight of the real one split between them. Turning it off in the
+  // dashboard does not hold: the next deploy reads this file, finds nothing, and
+  // enables it again.
+  //
+  // Set "preview_urls": true for a while if you ever want to look at a build
+  // before it replaces the live site.
+  "workers_dev": false,
+  "preview_urls": false,
+
   "assets": {
     // The folder that goes out to the world. Everything else in the repository —
     // scripts, blocks, dictionaries — is build material and stays behind.

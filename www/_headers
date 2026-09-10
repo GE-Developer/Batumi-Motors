@@ -1,0 +1,30 @@
+# Response headers for the site. Cloudflare reads this file and never serves it
+# as a page of its own.
+#
+# One thing to know before editing: rules that both match a request are MERGED,
+# not overridden. Name the same header in two blocks and the values are joined
+# with a comma — for Cache-Control that means the first max-age wins and the
+# second is dead weight. So Cache-Control is set in exactly one place below, and
+# HTML is deliberately left with what Cloudflare already sends for it:
+# "public, max-age=0, must-revalidate" — ask every time, download only if changed.
+# That is right for pages, whose whole point is to change when a price does.
+
+# Styles, scripts, fonts. Cached for a year and never revalidated, which is safe
+# only because of two things:
+#   • the font files are final — their content will not change under these names;
+#   • the stylesheet and the scripts are linked with ?v=<hash of the file>, which
+#     update.ts stamps in. Edit the stylesheet and the link becomes a new address
+#     the browser has never fetched, so the edit arrives at once.
+# Drop the versioning and this rule turns into a trap: returning visitors would
+# keep the old stylesheet for a year.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Applies to everything, Cache-Control deliberately absent — see the note above.
+/*
+  # Do not let the browser second-guess the declared content type. Without it a
+  # file can be treated as something other than what the server called it.
+  X-Content-Type-Options: nosniff
+  # Other sites see that a visitor came from batumimotors.com, but not which page
+  # they were reading. Full addresses stay inside the site.
+  Referrer-Policy: strict-origin-when-cross-origin

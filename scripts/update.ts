@@ -31,6 +31,7 @@
 */
 
 import { readFileSync, writeFileSync, readdirSync, existsSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join, relative, sep, basename } from "node:path";
 import { substitute, publicData } from "../lib/site.ts";
 
@@ -284,6 +285,39 @@ function fixContacts(page: string, data: Values): string {
   return page;
 }
 
+/** Stamp every stylesheet and script link with a version taken from the file's
+    own contents: /assets/css/style.css?v=3f9c2a1b04.
+
+    This exists so the files can be cached hard. Their names never change, so
+    without a version a long cache is a trap: edit the stylesheet and everyone who
+    has already been on the site keeps the old one until their cache expires. With
+    the hash in the link, an edit changes the address, the browser sees a file it
+    has never fetched, and takes the new one immediately — while an unchanged file
+    keeps its address and is never asked for again.
+
+    The whole page is scanned, not just the blocks: the stylesheet link sits in
+    blocks/head.html, but the three script tags sit directly in each page's markup,
+    outside any marker. Same reasoning as fixContacts() above.
+
+    An existing ?v=… is replaced rather than appended to, so running this twice
+    does not stack versions. A file that is linked but missing from disk keeps a
+    bare link — a broken path should look broken, not carry a confident version. */
+const ASSET_LINK = /\/assets\/(?:css|js)\/[a-z0-9-]+\.(?:css|js)(?:\?v=[a-f0-9]+)?/g;
+
+function assetVersion(webPath: string): string | null {
+  const disk = join(SITE_DIR, webPath.replace(/^\//, ""));
+  if (!existsSync(disk)) return null;
+  return createHash("sha256").update(readFileSync(disk)).digest("hex").slice(0, 10);
+}
+
+function fixAssetVersions(page: string): string {
+  return page.replace(ASSET_LINK, (full) => {
+    const bare = full.split("?")[0];
+    const version = assetVersion(bare);
+    return version ? `${bare}?v=${version}` : bare;
+  });
+}
+
 /*
   loadContext() / fillBlocks() / applyToFile() — pulled out of main() so that
   car-pages.ts can do the same thing: it assembles a car page entirely in memory
@@ -339,6 +373,7 @@ export function fillBlocks(html: string, path: string, ctx: BlocksContext): stri
   after = insertBlocks(after, ctx.blocks, values, lang, key, name);
   after = fixPageLang(after, lang);
   after = fixContacts(after, ctx.data);
+  after = fixAssetVersions(after);
   return after;
 }
 
