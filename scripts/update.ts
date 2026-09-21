@@ -194,7 +194,10 @@ function buildAlternates(key: string, lang: Lang, domain: string, indent = "  ")
     nobody shares those.
 
     An image is added only when data.txt has an og-image key. Without it the
-    preview still works: the messenger shows the name and the description. */
+    preview still works: the messenger shows the name and the description. The
+    key may hold a full address or a path from the root of the site; a path is
+    joined to the domain here, because a messenger fetches the picture from its
+    own servers and a relative address means nothing to it. */
 function buildOpenGraph(html: string, key: string, lang: Lang, data: Values,
                         indent = "  "): string {
   if (key === "404.html") return "";
@@ -213,11 +216,17 @@ function buildOpenGraph(html: string, key: string, lang: Lang, data: Values,
     ["og:title", title],
     ["og:description", description],
   ];
-  if (data["og-image"]) tags.push(["og:image", data["og-image"]]);
+  const image = data["og-image"];
+  if (image) {
+    tags.push(["og:image", image.startsWith("/") ? domain + image : image]);
+    // Stated outright so the messenger can lay out the card before the picture
+    // has finished downloading, instead of reflowing the message once it lands.
+    tags.push(["og:image:width", "1200"], ["og:image:height", "630"]);
+  }
 
   const lines = tags.map(([k, v]) => `${indent}<meta property="${k}" content="${v}">`);
   lines.push(`${indent}<meta name="twitter:card" content="` +
-             (data["og-image"] ? "summary_large_image" : "summary") + `">`);
+             (image ? "summary_large_image" : "summary") + `">`);
   return lines.join("\n");
 }
 

@@ -10,6 +10,6 @@
     "car-pages": "node scripts/car-pages.ts",
     "build": "node scripts/update.ts && node scripts/cars.ts && node scripts/deals.ts && node scripts/car-pages.ts && node scripts/sitemap.ts",
     "sitemap": "node scripts/sitemap.ts",
-    "deploy": "npm run build && npx wrangler@latest pages deploy www --project-name=batumi-motors"
+    "deploy": "npm run build && npx wrangler@latest deploy"
   }
 }

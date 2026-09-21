@@ -2,6 +2,12 @@
 domain = https://batumimotors.com
 
 
+# ─── Link preview ────────────────────────────────────────────
+# The picture a messenger shows when the address is sent to somebody. One for
+# the whole site, 1200×630. The drawing it is built from lives in docs/og.svg.
+og-image = /og.png
+
+
 # ─── Contacts ────────────────────────────────────────────────
 phone = +995 599 114 024
 phone-link = +995599114024
