@@ -41,6 +41,8 @@ import { readData } from "../lib/site.ts";
 
 const ROOT = join(import.meta.dirname, "..", "www");
 const PORT = 4444;
+// Loopback: the draft is for this desk, not for the network around it.
+const HOST = "127.0.0.1";
 const WATCH_INTERVAL_SEC = 10;
 
 const TYPES: Record<string, string> = {
@@ -142,8 +144,15 @@ server.on("error", (error: NodeJS.ErrnoException) => {
   throw error;
 });
 
-server.listen(PORT, () => {
+// The second argument is the point: bound to the loopback address, the draft
+// answers this computer and nothing else. Left out, node listens on every
+// network interface and the draft opens from any device on the same Wi-Fi —
+// which is how it was until 21.09.2026, and how the site used to be looked at
+// on a phone. That convenience is what was given up here: type the Mac's
+// address into a phone now and nothing answers.
+server.listen(PORT, HOST, () => {
   console.log(`Site is up: http://localhost:${PORT}/ru/`);
+  console.log("This computer only — not reachable from the phone or the network");
   console.log(`Watching the database: checking every ${WATCH_INTERVAL_SEC} s`);
   console.log("To stop — Ctrl+C");
   // readData() inside watch() now throws an Error rather than killing the
