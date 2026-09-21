@@ -9,6 +9,14 @@
        from search — let Google show /ru/, /en/ or /ka/ directly. -->
   <meta name="robots" content="noindex">
 
+  <!-- The same two lines as in blocks/head.html. They are repeated by hand
+       because this page is written by hand and takes no #head marker: it must
+       stay a single file that redirects before anything else happens. A
+       visitor is here for a few milliseconds, but the tab is drawn in those
+       milliseconds too. -->
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
   <script>
     // Sits in <head> and runs before painting — so nothing flickers.
     // location.replace, not href: the address does not enter history, and the
