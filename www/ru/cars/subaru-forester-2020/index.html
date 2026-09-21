@@ -48,6 +48,85 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- What this page IS, spelled out for a search engine instead of left to be
+       guessed from the words: the business on the home page, the car on a car
+       page. Empty on the rest — there is nothing there worth a claim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Car",
+        "@id": "https://batumimotors.com/ru/cars/subaru-forester-2020/#car",
+        "name": "Subaru Forester 2020",
+        "url": "https://batumimotors.com/ru/cars/subaru-forester-2020/",
+        "brand": {
+          "@type": "Brand",
+          "name": "Subaru"
+        },
+        "model": "Forester",
+        "vehicleModelDate": "2020",
+        "bodyType": "Кроссовер",
+        "vehicleTransmission": "Вариатор",
+        "fuelType": "Бензин",
+        "driveWheelConfiguration": "Полный привод",
+        "vehicleSeatingCapacity": 5,
+        "numberOfDoors": 5,
+        "vehicleEngine": {
+          "@type": "EngineSpecification",
+          "engineDisplacement": {
+            "@type": "QuantitativeValue",
+            "value": 2.5,
+            "unitCode": "LTR"
+          }
+        },
+        "image": [
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Subaru%20Forester%202020/1.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Subaru%20Forester%202020/2.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Subaru%20Forester%202020/3.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Subaru%20Forester%202020/4.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Subaru%20Forester%202020/5.jpg"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://batumimotors.com/ru/cars/subaru-forester-2020/",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "price": 45,
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "USD",
+            "price": 45,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Batumi Motors",
+            "item": "https://batumimotors.com/ru/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Автопарк",
+            "item": "https://batumimotors.com/ru/cars/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Subaru Forester 2020"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script>
     // The theme is applied BEFORE painting, otherwise a dark page flashes white.
     try {

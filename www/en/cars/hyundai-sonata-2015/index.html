@@ -47,6 +47,84 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- What this page IS, spelled out for a search engine instead of left to be
+       guessed from the words: the business on the home page, the car on a car
+       page. Empty on the rest — there is nothing there worth a claim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Car",
+        "@id": "https://batumimotors.com/en/cars/hyundai-sonata-2015/#car",
+        "name": "Hyundai Sonata 2015",
+        "url": "https://batumimotors.com/en/cars/hyundai-sonata-2015/",
+        "brand": {
+          "@type": "Brand",
+          "name": "Hyundai"
+        },
+        "model": "Sonata",
+        "vehicleModelDate": "2015",
+        "bodyType": "Saloon",
+        "vehicleTransmission": "Automatic",
+        "fuelType": "Hybrid",
+        "driveWheelConfiguration": "Front-wheel drive",
+        "vehicleSeatingCapacity": 5,
+        "numberOfDoors": 4,
+        "vehicleEngine": {
+          "@type": "EngineSpecification",
+          "engineDisplacement": {
+            "@type": "QuantitativeValue",
+            "value": 2,
+            "unitCode": "LTR"
+          }
+        },
+        "image": [
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Hyundai%20Sonata%202015/1.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Hyundai%20Sonata%202015/2.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Hyundai%20Sonata%202015/3.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Hyundai%20Sonata%202015/4.jpg"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://batumimotors.com/en/cars/hyundai-sonata-2015/",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "price": 37,
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "USD",
+            "price": 37,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Batumi Motors",
+            "item": "https://batumimotors.com/en/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Fleet",
+            "item": "https://batumimotors.com/en/cars/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Hyundai Sonata 2015"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script>
     // The theme is applied BEFORE painting, otherwise a dark page flashes white.
     try {

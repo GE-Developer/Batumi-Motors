@@ -187,3 +187,24 @@ export function escape(text: string): string {
 export function escapeAttr(text: string): string {
   return escape(text).replace(/"/g, "&quot;");
 }
+
+
+/** A block of structured data for the <head>: the JSON-LD a search engine reads
+    to learn WHAT a page is about, rather than guessing from the words on it.
+
+    Two things are done to the JSON on the way out. Every "<" becomes \u003c,
+    which JSON treats as the same character: without it a "</script>" inside a
+    value — and the values come from the database — would close the tag early
+    and spill the rest of the data onto the page as text. And keys whose value
+    is undefined are dropped by JSON.stringify on its own, so a caller can hand
+    over a field the database left empty without checking first.
+
+    The braces are safe from substitute(): it replaces {token} only where the
+    braces hug lowercase letters, digits and hyphens, and in JSON a brace is
+    always followed by a quote. */
+export function jsonLd(value: unknown, indent = "  "): string {
+  const body = JSON.stringify(value, null, 2).replace(/</g, "\\u003c");
+  return `${indent}<script type="application/ld+json">\n` +
+         body.split("\n").map((row) => indent + row).join("\n") +
+         `\n${indent}</script>`;
+}

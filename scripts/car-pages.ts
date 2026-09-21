@@ -45,10 +45,11 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { LANGS, ROOT, fail, escape, escapeAttr, word, plural, substitute, publicData, readData,
+         jsonLd,
          type Lang, type Values } from "../lib/site.ts";
-import { fetchCars, photoExists, complainOnce, sizedAttrs, sizedSrcset, type Car } from "./cars.ts";
+import { fetchCars, livePhotos, sizedAttrs, sizedSrcset, type Car } from "./cars.ts";
 import { loadContext, fillBlocks, type BlocksContext } from "./update.ts";
-import { steps, label } from "../lib/tariffs.ts";
+import { steps, label, minPrice } from "../lib/tariffs.ts";
 
 const TEMPLATE_PATH = join(ROOT, "templates", "car.html");
 
@@ -194,20 +195,8 @@ async function buildGallery(car: Car, text: Values, data: Values, page: string, 
   const THUMB_WIDTHS = [200, 300];
   const THUMB_SIZES = "110px";
 
-  const urls = (car.photos ?? [])
-  // The photos column can hold either a short path "slug/file.jpg" or a whole
-  // address — the "Copy URL" button in the Supabase panel gives exactly the whole
-  // one. The address used to be glued onto photos-url as a second piece,
-  // producing nonsense like "…/public/Cars/https://…", so a ready address is
-  // taken as it is.
-    .map((path) => /^https?:\/\//.test(path) ? path
-      : data["photos-url"].replace(/\/+$/, "") + "/" + path.replace(/^\/+/, ""));
-
-  const working: string[] = [];
-  for (const url of urls) {
-    if (await photoExists(url)) working.push(url);
-    else complainOnce(car.slug, url);
-  }
+  // The same list the car's structured data names — see livePhotos() in cars.ts.
+  const working = await livePhotos(car, data);
 
   // 0 photos — a placeholder frame instead of a gallery. It never disappears
   // entirely: it holds the shape of the 7fr/5fr column next to the price block,
@@ -484,6 +473,86 @@ function buildCarTerms(car: Car, lang: Lang, text: Values, page: string, depth: 
 /** Assemble one car's page in one language — entirely as a string, reading and
     writing nothing on disk. Comparing it with what is in www/, and the writing
     itself, are the caller's business (render() below). */
+/** Structured data for a car page: the car itself, and the trail leading to it.
+
+    Everything claimed here is already on the page in words — the same make, the
+    same specifications out of the same dictionary, the same "from $42" off the
+    same ladder, the same photographs through livePhotos(). That is the whole
+    rule for this kind of markup: it restates what a visitor sees, it never adds
+    to it. Claim what the page does not show and a search engine is entitled to
+    throw the lot away, including the honest half.
+
+    Both objects travel under one @graph rather than in two script tags: one
+    block in the head, one place to look when something reads wrong. */
+async function buildStructuredData(car: Car, lang: Lang, text: Values, data: Values,
+                                   page: string): Promise<string> {
+  const domain = data["domain"].replace(/\/+$/, "");
+  const home = `${domain}/${lang}/`;
+  const here = `${home}cars/${car.slug}/`;
+  const name = `${car.brand} ${car.model} ${car.year}`;
+  const photos = await livePhotos(car, data);
+  const from = car.tariffs ? minPrice(car.tariffs) : 0;
+
+  return jsonLd({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Car",
+        "@id": here + "#car",
+        name,
+        url: here,
+        brand: { "@type": "Brand", name: car.brand },
+        model: car.model,
+        vehicleModelDate: String(car.year),
+        // The same guards as SPEC_FIELDS above, and deliberately the same
+        // dictionary keys: the value in the markup is the word printed in the
+        // specifications table, in the language of the page.
+        bodyType: car.body ? word(text, `body-${car.body}`, page) : undefined,
+        vehicleTransmission: car.transmission ? word(text, `trans-${car.transmission}`, page) : undefined,
+        fuelType: car.fuel ? word(text, `fuel-${car.fuel}`, page) : undefined,
+        driveWheelConfiguration: car.drive ? word(text, `drive-${car.drive}`, page) : undefined,
+        vehicleSeatingCapacity: car.seats ?? undefined,
+        numberOfDoors: car.doors ?? undefined,
+        vehicleEngine: car.engine_l != null
+          ? { "@type": "EngineSpecification",
+              engineDisplacement: { "@type": "QuantitativeValue", value: car.engine_l, unitCode: "LTR" } }
+          : undefined,
+        image: photos.length ? photos : undefined,
+        // No ladder, no offer: a price of zero would be a lie, and an offer
+        // without a price is rejected anyway.
+        offers: from > 0 ? {
+          "@type": "Offer",
+          url: here,
+          availability: "https://schema.org/InStock",
+          priceCurrency: "USD",
+          // The bottom rung — the same number the card and the price block
+          // print as "from".
+          price: from,
+          // Said twice on purpose: price alone reads as the cost of the car,
+          // and this is the cost of a DAY of it. UN/CEFACT calls a day "DAY".
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            priceCurrency: "USD",
+            price: from,
+            unitCode: "DAY",
+          },
+        } : undefined,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1,
+            name: `${data["brand-1"]} ${data["brand-2"]}`, item: home },
+          { "@type": "ListItem", position: 2,
+            name: word(text, "nav-cars", page), item: home + "cars/" },
+          // The last rung carries no address: it is the page being read.
+          { "@type": "ListItem", position: 3, name },
+        ],
+      },
+    ],
+  });
+}
+
 async function buildPage(car: Car, lang: Lang, ctx: BlocksContext, page: string): Promise<string> {
   const text = ctx.texts[lang];
   const template = readFileSync(TEMPLATE_PATH, "utf8");
@@ -533,7 +602,9 @@ async function buildPage(car: Car, lang: Lang, ctx: BlocksContext, page: string)
   // (url-cars, url-ru/en/ka, alternates, fontpreload) and pours in the header,
   // footer and <head> — the page is never without them for a second.
   let html = substitute(template, values);
-  html = fillBlocks(html, join(ROOT, page), ctx);
+  html = fillBlocks(html, join(ROOT, page), ctx, {
+    jsonld: await buildStructuredData(car, lang, text, ctx.data, page),
+  });
 
   const leftover = [...new Set([...html.matchAll(/\{([a-z0-9-]+)\}/g)].map((m) => m[1]))];
   if (leftover.length)

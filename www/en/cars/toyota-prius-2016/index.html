@@ -47,6 +47,84 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- What this page IS, spelled out for a search engine instead of left to be
+       guessed from the words: the business on the home page, the car on a car
+       page. Empty on the rest — there is nothing there worth a claim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Car",
+        "@id": "https://batumimotors.com/en/cars/toyota-prius-2016/#car",
+        "name": "Toyota Prius 2016",
+        "url": "https://batumimotors.com/en/cars/toyota-prius-2016/",
+        "brand": {
+          "@type": "Brand",
+          "name": "Toyota"
+        },
+        "model": "Prius",
+        "vehicleModelDate": "2016",
+        "bodyType": "Liftback",
+        "vehicleTransmission": "Automatic",
+        "fuelType": "Hybrid",
+        "driveWheelConfiguration": "Front-wheel drive",
+        "vehicleSeatingCapacity": 5,
+        "numberOfDoors": 5,
+        "vehicleEngine": {
+          "@type": "EngineSpecification",
+          "engineDisplacement": {
+            "@type": "QuantitativeValue",
+            "value": 1.8,
+            "unitCode": "LTR"
+          }
+        },
+        "image": [
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/1.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/2.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/3.jpg",
+          "https://adfdzsbzjachpckyhlwz.supabase.co/storage/v1/object/public/Cars/Toyota%20Prius%202016%20PQ-897-PP/4.jpg"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://batumimotors.com/en/cars/toyota-prius-2016/",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "price": 37,
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "USD",
+            "price": 37,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Batumi Motors",
+            "item": "https://batumimotors.com/en/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Fleet",
+            "item": "https://batumimotors.com/en/cars/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Toyota Prius 2016"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script>
     // The theme is applied BEFORE painting, otherwise a dark page flashes white.
     try {

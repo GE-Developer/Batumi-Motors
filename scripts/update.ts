@@ -33,7 +33,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, relative, sep, basename } from "node:path";
-import { substitute, publicData } from "../lib/site.ts";
+import { substitute, publicData, jsonLd } from "../lib/site.ts";
 
 const ROOT = join(import.meta.dirname, "..");
 const DATA_FILE = join(ROOT, "data.txt");
@@ -230,6 +230,35 @@ function buildOpenGraph(html: string, key: string, lang: Lang, data: Values,
   return lines.join("\n");
 }
 
+/** Structured data for the home page: who this business is, in the form a
+    search engine reads instead of guessing from the words on the page.
+
+    AutoRental is schema.org's own type for car hire — narrower than
+    LocalBusiness and understood as such. Only the home page carries it: repeat
+    the same business on all forty-five pages and a search engine has to work
+    out which one is the real description. Car pages describe the CAR instead,
+    and that is built in car-pages.ts, where the car's data actually is.
+
+    No street address is claimed here, because the site does not state one. The
+    city and the country are true and enough to be placed on the map of Batumi;
+    inventing a street to fill the field would be worse than leaving it out. */
+function buildStructuredData(key: string, lang: Lang, data: Values, indent = "  "): string {
+  if (key !== "") return "";
+  const domain = data["domain"].replace(/\/+$/, "");
+  return jsonLd({
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    "@id": domain + "/#business",
+    name: `${data["brand-1"]} ${data["brand-2"]}`,
+    url: domain + url(lang, key),
+    image: domain + "/og.png",
+    telephone: data["phone-link"],
+    address: { "@type": "PostalAddress", addressLocality: "Batumi", addressCountry: "GE" },
+    areaServed: { "@type": "City", name: "Batumi" },
+    sameAs: [`https://www.instagram.com/${data["instagram"]}`],
+  }, indent);
+}
+
 function buildFontPreload(lang: Lang, indent = "  "): string {
   return FONT_PRELOAD[lang]
     .map((name) => `${indent}<link rel="preload" href="/assets/fonts/${name}.woff2" ` +
@@ -364,7 +393,8 @@ export function loadContext(): BlocksContext {
     where {url-cars}, {nav-cars} and the like sit right in the markup, not under
     a marker) — one substitution mechanism for the whole project, not two similar
     ones. */
-export function fillBlocks(html: string, path: string, ctx: BlocksContext): string {
+export function fillBlocks(html: string, path: string, ctx: BlocksContext,
+                          extra: Values = {}): string {
   const parsed = classify(path);
   if (!parsed) return html;
   const [lang, key] = parsed;
@@ -377,6 +407,10 @@ export function fillBlocks(html: string, path: string, ctx: BlocksContext): stri
   values["alternates"] = buildAlternates(key, lang, ctx.data["domain"]);
   values["og"] = buildOpenGraph(html, key, lang, ctx.data);
   values["fontpreload"] = buildFontPreload(lang);
+  values["jsonld"] = buildStructuredData(key, lang, ctx.data);
+  // Last, so a page that knows better about itself wins: a car page hands over
+  // its own {jsonld}, describing the car rather than the business.
+  Object.assign(values, extra);
 
   let after = substitute(html, values);
   after = insertBlocks(after, ctx.blocks, values, lang, key, name);

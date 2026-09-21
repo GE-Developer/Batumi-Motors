@@ -48,6 +48,78 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- What this page IS, spelled out for a search engine instead of left to be
+       guessed from the words: the business on the home page, the car on a car
+       page. Empty on the rest — there is nothing there worth a claim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Car",
+        "@id": "https://batumimotors.com/ka/cars/nissan-rogue-2019/#car",
+        "name": "Nissan Rogue 2019",
+        "url": "https://batumimotors.com/ka/cars/nissan-rogue-2019/",
+        "brand": {
+          "@type": "Brand",
+          "name": "Nissan"
+        },
+        "model": "Rogue",
+        "vehicleModelDate": "2019",
+        "bodyType": "კროსოვერი",
+        "vehicleTransmission": "ვარიატორი",
+        "fuelType": "ბენზინი",
+        "driveWheelConfiguration": "სრული წამყვანი",
+        "vehicleSeatingCapacity": 5,
+        "numberOfDoors": 5,
+        "vehicleEngine": {
+          "@type": "EngineSpecification",
+          "engineDisplacement": {
+            "@type": "QuantitativeValue",
+            "value": 2,
+            "unitCode": "LTR"
+          }
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://batumimotors.com/ka/cars/nissan-rogue-2019/",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "price": 45,
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "USD",
+            "price": 45,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Batumi Motors",
+            "item": "https://batumimotors.com/ka/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "ავტოპარკი",
+            "item": "https://batumimotors.com/ka/cars/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Nissan Rogue 2019"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <script>
     // The theme is applied BEFORE painting, otherwise a dark page flashes white.
     try {

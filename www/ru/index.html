@@ -47,6 +47,33 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- What this page IS, spelled out for a search engine instead of left to be
+       guessed from the words: the business on the home page, the car on a car
+       page. Empty on the rest — there is nothing there worth a claim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    "@id": "https://batumimotors.com/#business",
+    "name": "Batumi Motors",
+    "url": "https://batumimotors.com/ru/",
+    "image": "https://batumimotors.com/og.png",
+    "telephone": "+995599114024",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Batumi",
+      "addressCountry": "GE"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Batumi"
+    },
+    "sameAs": [
+      "https://www.instagram.com/batumimotors"
+    ]
+  }
+  </script>
+
   <script>
     // The theme is applied BEFORE painting, otherwise a dark page flashes white.
     try {

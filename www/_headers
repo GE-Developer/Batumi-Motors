@@ -28,3 +28,16 @@
   # Other sites see that a visitor came from batumimotors.com, but not which page
   # they were reading. Full addresses stay inside the site.
   Referrer-Policy: strict-origin-when-cross-origin
+  # What a page may load, and from where. Everything not listed simply does not
+  # load — so a script smuggled into the markup has nowhere to come from.
+  #
+  # The line between the two markers is WRITTEN BY scripts/headers.ts on every
+  # build. Do not edit it here. The site's two inline scripts — the theme switch
+  # in blocks/head.html and the language redirect in www/index.html — are
+  # allowed by the hash of their exact text, and that hash changes the moment
+  # either of them is edited. A hand-kept line would fall out of step on the
+  # first edit and do it silently: server.ts sends no headers, so the site would
+  # go on working at the desk and break only once it is live.
+  # @csp
+  Content-Security-Policy: default-src 'self'; img-src 'self' https://adfdzsbzjachpckyhlwz.supabase.co; script-src 'self' 'sha256-8mH8neQJTj4RFoMh92qZDb9a66W88UjckzvL2LQuZfY=' 'sha256-YoRH/2xVRP/N3f9AEmGu+WEHDWQcSxRZe86FV1x+xTo='; style-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
+  # @

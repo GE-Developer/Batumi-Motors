@@ -129,6 +129,31 @@ export async function photoExists(url: string): Promise<boolean> {
   return checked.get(url)!;
 }
 
+/** A car's photos, ready to be put on a page: short paths expanded against
+    photos-url, addresses that answer with nothing dropped.
+
+    It lives here rather than in car-pages.ts because it is the pair to the
+    photoExists() cache above, and because the gallery is no longer its only
+    caller — the car's structured data has to name the same pictures the page
+    shows, and two lists built by two pieces of code drift apart. */
+export async function livePhotos(car: Car, data: Values): Promise<string[]> {
+  // The photos column can hold either a short path "slug/file.jpg" or a whole
+  // address — the "Copy URL" button in the Supabase panel gives exactly the
+  // whole one. The address used to be glued onto photos-url as a second piece,
+  // producing nonsense like "…/public/Cars/https://…", so a ready address is
+  // taken as it is.
+  const urls = (car.photos ?? [])
+    .map((path) => /^https?:\/\//.test(path) ? path
+      : data["photos-url"].replace(/\/+$/, "") + "/" + path.replace(/^\/+/, ""));
+
+  const working: string[] = [];
+  for (const url of urls) {
+    if (await photoExists(url)) working.push(url);
+    else complainOnce(car.slug, url);
+  }
+  return working;
+}
+
 /** Which loss we have already mentioned. The same photo is checked by the card
     and by the car page, each in three languages: without this memory one missing
     photo produced six identical lines in the terminal. */
